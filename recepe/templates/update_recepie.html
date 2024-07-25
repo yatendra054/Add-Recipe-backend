@@ -1,0 +1,50 @@
+{% extends "base.html" %}
+{% block start %}
+<style>
+  .containeru{
+    height: 93vh;
+    width: 100%;
+    background-image: url("https://img.lovepik.com/photo/20230422/medium/lovepik-lentil-dishes-food-background-lentil-soup-with-cooking-ingredients-on-dark-photo-image_352392162.jpg");
+    background-repeat: no-repeat;
+    background-size: 100% 100%;
+    background-attachment: fixed;
+    background-position: center;
+    margin: 0;
+    overflow-y: hidden;
+    
+  }
+  .transparent-form {
+    margin:0 auto;
+    width:40%;
+    background-color: rgba(255, 255, 255, 0.4);
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  }
+</style>
+
+<div class="containeru">
+    <form class="col-6 max-auto card p-3 shadow-lg mt-2 transparent-form " method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        <h1>UPDATE RECEPIES</h1>
+        <div class="mb-3">
+          <label for="exampleInputEmail1" class="form-label">Recepies_name</label>
+          <input name="Recepies_name" value="{{recepies.Recepies_name}}" required type="text" class="form-control">
+        </div>
+        <div class="mb-3">
+          <label for="exampleInputEmail1" class="form-label">Recepies_description</label>
+          <textarea name="Recepies_description" class="form-control" required>{{recepies.Recepies_description}}</textarea>
+        </div>
+        <div class="mb-3">
+            <label for="exampleInputEmail1" class="form-label">Country</label>
+            <input name="Country" class="form-control" value="{{recepies.Country}}" required type="text">
+        </div>
+        <div class="mb-3">
+            <label for="exampleInputEmail1" class="form-label">Dish_Image</label>
+            <input name="Dish_Image" type="file" class="form-control">
+        </div>
+        <button type="submit" class="btn btn-primary">Update Recepies</button>
+      </form>
+</div>
+
+
+
+{% endblock %}

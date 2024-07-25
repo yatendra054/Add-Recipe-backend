@@ -1,0 +1,105 @@
+{% extends "base.html" %}
+ {% block start %}
+ <style>
+  .containerz{
+    height: 100%;
+    width: 100%;
+    background-image: url("https://images.rawpixel.com/image_800/cHJpdmF0ZS9sci9pbWFnZXMvd2Vic2l0ZS8yMDIyLTA1L3B4MTM2OTgxMy1pbWFnZS1rd3Z4eHA5MS5qcGc.jpg");
+    background-repeat: no-repeat;
+    background-size: 100% 100%;
+    background-attachment: fixed;
+    background-position: center;
+    margin: 0;
+    overflow-y: hidden;
+    
+  }
+  .Start{
+    margin: 0 auto;
+    margin:0 auto;
+    background-color: rgba(255, 255, 255, 0.4);
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  }
+  .commen{
+    background-color:transparent;
+  }
+    
+  .Search_star{
+    margin-left: 0;
+
+  }
+  .show{
+    background-color: rgba(226, 232, 240, 0.7);
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    font-size:18px;
+    background-color: rgb(255 237 213);
+  }
+</style>
+
+<div class="containerz">
+    <form class="col-6 max-auto card p-3 shadow-lg mt-1 Start" method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        <h1>ADD RECEPIES</h1>
+        <div class="mb-3">
+          <label for="exampleInputEmail1" class="form-label">Recepies_name</label>
+          <input name="Recepies_name" required type="text" class="form-control">
+        </div>
+        <div class="mb-3">
+          <label for="exampleInputEmail1" class="form-label">Recepies_description</label>
+          <textarea name="Recepies_description" class="form-control" required></textarea>
+          <button type="button" class="btn btn-secondary mt-2 mic-button">🎤 Speak</button>
+        </div>
+        <div class="mb-3">
+            <label for="exampleInputEmail1" class="form-label">Country</label>
+            <input name="Country" class="form-control" required type="text">
+        </div>
+        <div class="mb-3">
+            <label for="exampleInputEmail1" class="form-label">Dish_Image</label>
+            <input name="Dish_Image" type="file" class="form-control">
+        </div>
+        <button type="submit" class="btn btn-primary">Add Recepies</button>
+      </form>
+
+      <hr>
+      <div class="mt">
+        <div class="col-6 Search_star" >
+          <form>
+            <div class="mb-2">
+              <label for="exampleInputEmail1" class="form-label" style="color: black; font-size: 1.5em;">Search Food</label>
+              <input name="search"  type="text" class="form-control commen">
+              <button type="submit" class="btn btn-primary mt-1">Search</button>
+            </div>
+            
+          </form>
+        </div>
+      </div>
+                                
+      <table class="mt-1 show">
+        <thead>
+          <tr>
+            <th scope="col">#</th>
+            <th scope="col">Recepies Name</th>
+            <th scope="col">Recepies Description</th>
+            <th scope="col">Country</th>
+            <th scope="col">Dish Image</th>
+            <th scope="col">Action</th>
+          </tr>
+        </thead>
+        <tbody style="font-style: italic;">
+          {% for recepie in recepies %}
+          <tr>
+            <th scope="row">{{forloop.counter}}</th>
+            <td>{{recepie.Recepies_name}}</td>
+            <td>{{recepie.Recepies_description}}</td>
+            <td>{{recepie.Country}}</td>
+            <td>
+              <img src="/media/{{recepie.Dish_Image}}" style="height: 100px ; width: 120px"></td>
+            <td>
+              <a href="/delete_recepie/{{recepie.id}}/" class="btn btn-danger m-2">Delete</a>
+              <a href="/update_recepie/{{recepie.id}}/" class="btn btn-success m-2">Update</a></td>
+          </tr>
+          {% endfor %}
+        </tbody>
+      </table>  
+</div>
+
+{% endblock %}
