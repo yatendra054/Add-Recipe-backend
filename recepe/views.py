@@ -117,7 +117,6 @@ def register(request):
             last_name=last_name,
             email = email
         )
-        
         send_email_to_client(email)
         
         messages.success(request,"Username Successfully Register")
