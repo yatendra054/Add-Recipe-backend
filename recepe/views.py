@@ -93,7 +93,6 @@ def register(request):
         email = data.get("email")
         
         user= User.objects.filter(username=username)
-         
         if user.exists():
             messages.warning(request, "Username Already Present") 
             return redirect('/register')
