@@ -8,11 +8,3 @@ class Recepies(models.Model):
     Country=models.CharField(max_length=20)
     Dish_Image=models.ImageField(upload_to='Image')
     
-class UserRecord(models.Model):
-    user = models.OneToOneField(User,on_delete=models.CASCADE)
-    username=models.CharField(max_length=100,unique=True)
-    first_name=models.CharField(max_length=100)
-    last_name=models.CharField(max_length=100)
-    email=models.EmailField(unique=True)
-    
-    

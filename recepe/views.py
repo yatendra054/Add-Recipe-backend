@@ -110,13 +110,6 @@ def register(request):
         )
         user.set_password(password)
         user.save()
-        UserRecord.objects.create(
-            user=user,
-            username=username,
-            first_name=first_name,
-            last_name=last_name,
-            email = email
-        )
         send_email_to_client(email)
         
         messages.success(request,"Username Successfully Register")
