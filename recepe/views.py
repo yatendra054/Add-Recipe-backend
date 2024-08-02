@@ -115,4 +115,3 @@ def register(request):
         return redirect('/register')        
     
     return render(request,"register.html")
-    
