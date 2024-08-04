@@ -8,6 +8,7 @@ from django.contrib import messages
 from django.contrib.auth import authenticate,login,logout
 from django.contrib.auth.decorators import login_required
 from recepe.utils import send_email_to_client
+import re
 @login_required(login_url='/')
 def recepies(request):
     if request.method=="POST":
@@ -93,6 +94,18 @@ def register(request):
         email = data.get("email")
         
         user= User.objects.filter(username=username)
+        if not first_name.isalpha() or not last_name.isalpha():
+            messages.warning(request,"First and Last name should be in alphabates")
+            return redirect('/register')
+        
+        if not re.match(r"[a-zA-Z0-9._%+-]+@(gmail|yahoo)\.com",email):
+            messages.warning(request,"Email invalid format")
+            return redirect('/register')
+        
+        if len(password)<8:
+            messages.warning(request,"Password should be written at least 8 character")
+            return redirect('/register')
+        
         if user.exists():
             messages.warning(request, "Username Already Present") 
             return redirect('/register')

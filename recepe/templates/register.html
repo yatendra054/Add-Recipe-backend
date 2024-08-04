@@ -32,15 +32,15 @@
         {% endif %}
         <div class="mb-3">
             <label for="first_name" class="form-label" >FirstName</label>
-            <input name="first_name"  required type="text" class="form-control">
+            <input name="first_name"  required type="text" class="form-control" pattern="[A-Za-z]+", title="First Name should be in alphabate">
           </div>
         <div class="mb-3">
             <label for="last_name" class="form-label">LastName</label>
-            <input name="last_name"  required type="text" class="form-control">
+            <input name="last_name"  required type="text" class="form-control" pattern="[A-Za-z]+" title="Last Name Should be in alphabate">
         </div>
         <div class="mb-3">
           <label for="exampleInputEmail1" class="form-label">Email</label>
-          <input name="email"  required type="email" class="form-control">
+          <input name="email"  required type="email" class="form-control" pattern="[a-zA-Z0-9._%+-]+@(gmail|yahoo)\.com" title="Email in valid format and only from gmail or yahoo">
         </div>
         <div class="mb-3">
           <label for="username" class="form-label">Username</label>
@@ -48,7 +48,7 @@
         </div>
         <div class="mb-3">
           <label for="password" class="form-label">Password</label>
-          <input name="password"  required type="password" class="form-control">
+          <input name="password"  required type="password" class="form-control" minlength="8" title="Password should be written at least 8 character">
         </div>
         <p>Already have Account<a href="/">Login</a></p>
         <button type="submit" class="btn btn-primary"> Register</button>
