@@ -66,6 +66,11 @@ def login_page(request):
         username = request.POST.get("username")
         password = request.POST.get("password")
         
+        
+        if not username or not password:
+            messages.error(request,"Please login  with your username and password")
+            return redirect('/')
+        
         if not User.objects.filter(username = username).exists():
             messages.error(request,"Invalid Username")
             return redirect('/')
@@ -94,11 +99,11 @@ def register(request):
         email = data.get("email")
         
         user= User.objects.filter(username=username)
-        if not first_name.isalpha() or not last_name.isalpha():
+        if not first_name.isalpha():
             messages.warning(request,"First and Last name should be in alphabates")
             return redirect('/register')
         
-        if not re.match(r"[a-zA-Z0-9._%+-]+@(gmail|yahoo)\.com",email):
+        if not re.match(r"[a-z0-9._%+-]+@(gmail|yahoo)\.com",email):
             messages.warning(request,"Email invalid format")
             return redirect('/register')
         
@@ -115,14 +120,21 @@ def register(request):
             return redirect('/register')
         
         user=User.objects.create(
-            first_name=first_name,
-            last_name=last_name,
             username=username,
             email = email
         )
         user.set_password(password)
         user.save()
-        send_email_to_client(email)
+        
+        
+        UserInformation.objects.create(
+            user =user,
+            First_Name = first_name,
+            Last_Name = last_name,
+            User_Name = username,
+            Email = email
+        )
+        send_email_to_client(email,username)
         
         messages.success(request,"Username Successfully Register")
         return redirect('/register')        

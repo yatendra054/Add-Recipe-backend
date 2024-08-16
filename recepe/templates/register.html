@@ -1,5 +1,7 @@
 {% extends "base.html" %}
+
  {% block start %}
+ <title>Register</title>
 <style>
   .containery{
     height: 100%;
@@ -20,7 +22,7 @@
   }
 </style>
 <div class="containery">
-    <form class="col-6 max-auto card p-3 shadow-lg mt-1 log" method="post">
+    <form  class="col-6 max-auto card p-3 shadow-lg mt-1 log" method="post">
         {% csrf_token %}
         <h1>Register Page</h1>
         {% if messages %}
@@ -32,15 +34,15 @@
         {% endif %}
         <div class="mb-3">
             <label for="first_name" class="form-label" >FirstName</label>
-            <input name="first_name"  required type="text" class="form-control" pattern="[A-Za-z]+", title="First Name should be in alphabate">
+            <input name="first_name"  required type="text" class="form-control" pattern="[A-Za-z]+", title="First Name should be in letter">
           </div>
         <div class="mb-3">
             <label for="last_name" class="form-label">LastName</label>
-            <input name="last_name"  required type="text" class="form-control" pattern="[A-Za-z]+" title="Last Name Should be in alphabate">
+            <input name="last_name"  required type="text" class="form-control">
         </div>
         <div class="mb-3">
           <label for="exampleInputEmail1" class="form-label">Email</label>
-          <input name="email"  required type="email" class="form-control" pattern="[a-zA-Z0-9._%+-]+@(gmail|yahoo)\.com" title="Email in valid format and only from gmail or yahoo">
+          <input name="email"  required type="email" class="form-control" pattern="[a-z0-9._%+-]+@(gmail|yahoo)\.com" title="Email in valid format and only from gmail or yahoo">
         </div>
         <div class="mb-3">
           <label for="username" class="form-label">Username</label>
