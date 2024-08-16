@@ -24,3 +24,7 @@ Code version is live [here](https://add-recipe-backend.onrender.com/)
    install gunicorn
    gunicorn your_project_name:wsgi
    ```
+## Contribute
+
+I welcome you to join us in making this project even better.By adding some more features.
+   
