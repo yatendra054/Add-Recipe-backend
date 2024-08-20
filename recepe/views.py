@@ -103,7 +103,7 @@ def register(request):
             messages.warning(request,"First and Last name should be in alphabates")
             return redirect('/register')
         
-        if not re.match(r"[a-z0-9._%+-]+@(gmail|yahoo)\.com",email):
+        if not re.match(r"[a-zA-Z0-9._%+-]+@(gmail|yahoo)\.com",email):
             messages.warning(request,"Email invalid format")
             return redirect('/register')
         
@@ -140,3 +140,28 @@ def register(request):
         return redirect('/register')        
     
     return render(request,"register.html")
+def forget(request):
+    if request.method=="POST":
+        data= request.POST
+        email=data.get("email")
+        new_password=data.get("new_password")
+        confirm_password=data.get("confirm_password")
+        
+        if new_password != confirm_password:
+            messages.error(request,"Password is not match")
+            return redirect('/forget')
+        
+        try:
+            user=User.objects.get(email=email)
+        except User.DoesNotExist:
+            messages.error(request,"Email is not associated with any account")
+            return redirect('/forget')
+        user.set_password(new_password)
+        
+        user.save()
+        
+        messages.success(request, "Password reset successfully. Please log in with your new password.")
+        return redirect('/')
+        
+    return render(request,"foreget.html")
+            

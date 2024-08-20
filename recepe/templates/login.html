@@ -21,6 +21,17 @@
     background-color: rgba(255, 255, 255, 0.2);
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 }
+  .toggleu-password{
+    position: absolute;
+    top: 50%;
+    right: 10px;
+    transform: translateY(-50%);
+    cursor: pointer;
+  }
+  .fled {
+    position: relative;
+    width: 100%;
+  }
 </style>
 <div class="containerx">
     <form class="col-6 max-auto card p-3 shadow-lg mt-5 transparent-form" method="post">
@@ -38,16 +49,32 @@
           <input name="username"  type="text" class="form-control">
         </div>
         <div class="mb-3">
-          <label for="exampleInputEmail1" class="form-label">Password</label>
-          <input name="password" type="password" class="form-control">
-          
-
+          <label for="password" class="form-label">Password</label>
+          <div class="fled">
+            <input id="password" name="password" type="password" class="form-control">
+            <i class="fa fa-eye toggleu-password" onclick="togglePasswordVasibility()"></i>
+          </div>  
 
         </div>
-        <p>Don't have an Account<a href="/register/"> Register</a></p>
+        <p>Don't have an Account<a href="/register/" > Register</a></p>
+        <p><a href="/forget/" > Forget Password</a></p>
         <button type="submit" class="btn btn-primary"> Login</button>
     </form>
   </div>
-
+  <script>
+    function togglePasswordVasibility() {
+        var uPassword = document.getElementById('password');
+        var eyeIcons = document.querySelectorAll('.toggleu-password');
+  
+        if (uPassword.type === 'password') {
+            uPassword.type = 'text';
+            eyeIcons.forEach(icon => icon.classList.replace('fa-eye', 'fa-eye-slash'));
+        } else {
+            uPassword.type = 'password';
+            eyeIcons.forEach(icon => icon.classList.replace('fa-eye-slash', 'fa-eye'));
+        }
+    }
+  
+  </script>
 
 {% endblock %}

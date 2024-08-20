@@ -34,6 +34,8 @@ urlpatterns = [
     path("register/",register,name="register"),
     
     path("admin/", admin.site.urls),
+    
+    path("forget/",forget,name="forget")
 ]
 
 if settings.DEBUG:
