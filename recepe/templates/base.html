@@ -5,7 +5,7 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
     <script src="https://kit.fontawesome.com/e188245768.js" crossorigin="anonymous"></script>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Recepes</title>
+    <title>{% block title%}Recepes{% endblock %}</title>
     <style>
         table, th, td {
         border: 1px solid black;
@@ -18,18 +18,21 @@
 <body>
     <nav class="navbar show">
         <div class="container-fluid w-full">
-          <a class="navbar-brand">Navbar</a>
+          <a class="navbar-brand"><i class="fa-solid fa-wheat-awn"></i>Navbar</a>
           <div role="search">
+{% comment %} 
+        {% if page_title == 'Recepies_page'%} {% endcomment %}
+        
         {% if request.user.is_authenticated %}
-            <a href="/logout/" class="btn btn-success" type="submit">Logout</a>
+            <a href="/logout/" class="btn btn-success" type="submit"><i class="fa-solid fa-users"></i>Logout</a>
         {% else %}
-            <a href="/" class="btn btn-success" type="submit">Login</a>
+            <a href="/" class="btn btn-success" type="submit"><i class="fa-solid fa-users"></i>Login</a>
             <a href="/register/" class="btn btn-primary" type="submit">Register</a>
           </div>
         {% endif %}
         </div>
     </nav>
-    {% block start %}
+    {% block content %}
 
     {% endblock %}
 </body>

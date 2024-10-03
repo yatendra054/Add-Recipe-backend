@@ -7,6 +7,8 @@ class Recepies(models.Model):
     Recepies_description=models.TextField()
     Country=models.CharField(max_length=20)
     Dish_Image=models.ImageField(upload_to='Image')
+    
+    
 class UserInformation(models.Model):
     user = models.ForeignKey(User,on_delete=models.CASCADE)
     First_Name = models.CharField(max_length=30)
@@ -16,3 +18,5 @@ class UserInformation(models.Model):
     
     def __str__(self)->str:
         return self.User_Name
+
+    

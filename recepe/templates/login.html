@@ -1,6 +1,7 @@
 {% extends "base.html" %}
 
- {% block start %}
+{% block title %}Login{% endblock %}
+ {% block content %}
  <title>Login Page</title>
 <style>
   .containerx{
@@ -58,7 +59,7 @@
         </div>
         <p>Don't have an Account<a href="/register/" > Register</a></p>
         <p><a href="/forget/" > Forget Password</a></p>
-        <button type="submit" class="btn btn-primary"> Login</button>
+        <button type="submit" class="btn btn-primary"> <i class="fa-solid fa-users"></i> Login</button>
     </form>
   </div>
   <script>
