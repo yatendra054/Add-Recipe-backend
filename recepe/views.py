@@ -1,6 +1,9 @@
 from django.shortcuts import render,redirect,get_object_or_404
 
 from recepe.models import *
+from PIL import Image
+from io import BytesIO
+from django.core.files.base import ContentFile
 from django.http import HttpResponse
 from django.contrib.auth.models import User
 from Start import settings
@@ -9,6 +12,7 @@ from django.contrib.auth import authenticate,login,logout
 from django.contrib.auth.decorators import login_required
 from recepe.utils import send_email_to_client
 import re
+from django.urls import reverse
 @login_required(login_url='/')
 def recepies(request):
     if request.method=="POST":
@@ -164,4 +168,39 @@ def forget(request):
         return redirect('/')
         
     return render(request,"foreget.html")
+@login_required(login_url='/')
+def profile(request):
+    user_info, created = UserInformation.objects.get_or_create(user=request.user)
+    
+    if request.method == 'POST':
+        if 'profile_image' in request.FILES:
+            uploaded_image = request.FILES['profile_image']
+            image = Image.open(uploaded_image)
             
+            max_size = (300, 300)  
+            if image.mode in ("RGBA", "P"):
+                image = image.convert("RGB")
+            image = image.rotate(90, expand=True)
+            
+            if hasattr(Image, 'Resampling'):
+                resample_filter = Image.Resampling.LANCZOS
+            else:
+                resample_filter = Image.ANTIALIAS
+            
+            image.thumbnail(max_size, resample_filter)
+            
+            image_io = BytesIO()
+            image.save(image_io, format='JPEG', quality=85)  
+            
+            resized_image = ContentFile(image_io.getvalue(), uploaded_image.name)
+            user_info.profile_image.save(uploaded_image.name, resized_image, save=True)
+            
+            from django.contrib import messages
+            messages.success(request, "Profile image uploaded and resized successfully.")
+            
+            return redirect(reverse('profile'))  
+        else:
+            from django.contrib import messages
+            messages.error(request, "No image file was uploaded.")
+            return redirect(reverse('profile'))
+    return render(request, "Profile.html", {"user_info": user_info,'page_title':'Profile'})

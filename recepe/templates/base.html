@@ -19,12 +19,17 @@
     <nav class="navbar show">
         <div class="container-fluid w-full">
           <a class="navbar-brand"><i class="fa-solid fa-wheat-awn"></i>Navbar</a>
-          <div role="search">
-{% comment %} 
-        {% if page_title == 'Recepies_page'%} {% endcomment %}
+          <div role="search">  
         
         {% if request.user.is_authenticated %}
+            {% if page_title ==  'Profile' %}
+                <a href="/recepies/" class="btn btn-primary" type="submit">Recepie</a>
+                <a href="/logout/" class="btn btn-success" type="submit"><i class="fa-solid fa-users"></i>Logout</a>
+            {% else %}  
+            <a href="/profile/" class="btn btn-info" type="submit"><i class="fa-solid fa-user"></i> Profile</a>
             <a href="/logout/" class="btn btn-success" type="submit"><i class="fa-solid fa-users"></i>Logout</a>
+            {% endif %}
+            
         {% else %}
             <a href="/" class="btn btn-success" type="submit"><i class="fa-solid fa-users"></i>Login</a>
             <a href="/register/" class="btn btn-primary" type="submit">Register</a>

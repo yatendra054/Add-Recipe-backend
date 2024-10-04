@@ -15,6 +15,7 @@ class UserInformation(models.Model):
     Last_Name = models.CharField(max_length=30)
     User_Name = models.CharField(max_length=100)
     Email = models.EmailField(null=True)
+    profile_image = models.ImageField(upload_to='profile_images/', null=True, blank=True)
     
     def __str__(self)->str:
         return self.User_Name

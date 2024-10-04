@@ -34,6 +34,7 @@ urlpatterns = [
     path("register/",register,name="register"),
     
     path("admin/", admin.site.urls),
+    path("profile/",profile,name="profile"),
     
     path("forget/",forget,name="forget")
 ]
