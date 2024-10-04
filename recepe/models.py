@@ -8,6 +8,9 @@ class Recepies(models.Model):
     Country=models.CharField(max_length=20)
     Dish_Image=models.ImageField(upload_to='Image')
     
+    def __str__(self)->str:
+        return self.Recepies_name
+    
     
 class UserInformation(models.Model):
     user = models.ForeignKey(User,on_delete=models.CASCADE)

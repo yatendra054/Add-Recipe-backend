@@ -170,7 +170,7 @@ def forget(request):
     return render(request,"foreget.html")
 @login_required(login_url='/')
 def profile(request):
-    user_info, created = UserInformation.objects.get_or_create(user=request.user)
+    user_info,created= UserInformation.objects.get_or_create(user=request.user)
     
     if request.method == 'POST':
         if 'profile_image' in request.FILES:
@@ -180,7 +180,7 @@ def profile(request):
             max_size = (300, 300)  
             if image.mode in ("RGBA", "P"):
                 image = image.convert("RGB")
-            image = image.rotate(90, expand=True)
+            image = image.rotate(360, expand=True)
             
             if hasattr(Image, 'Resampling'):
                 resample_filter = Image.Resampling.LANCZOS
