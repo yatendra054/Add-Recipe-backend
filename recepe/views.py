@@ -194,8 +194,6 @@ def profile(request):
             
             resized_image = ContentFile(image_io.getvalue(), uploaded_image.name)
             user_info.profile_image.save(uploaded_image.name, resized_image, save=True)
-            
-            from django.contrib import messages
             messages.success(request, "Profile image uploaded and resized successfully.")
             
             return redirect(reverse('profile'))  
