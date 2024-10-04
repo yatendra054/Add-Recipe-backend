@@ -198,7 +198,6 @@ def profile(request):
             
             return redirect(reverse('profile'))  
         else:
-            from django.contrib import messages
             messages.error(request, "No image file was uploaded.")
             return redirect(reverse('profile'))
     return render(request, "Profile.html", {"user_info": user_info,'page_title':'Profile'})
