@@ -8,6 +8,7 @@ Here a first page after login
 
 <img src="home/register.png" alt="Image 1" width="50%" height="200" style="display;">
 <img src="home/Add_recepe.png" alt="Image 1" width="50%" height="200" style="display;">
+<img src="home/profile.png" alt="Image 1" width="50%" height="200" style="display;">
 
 
 ## Live 
