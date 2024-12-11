@@ -14,13 +14,11 @@ Here a first page after login
 <img src="home/Add_recepie.png" alt="Image 1" width="35%" height="200" style="display;">
 You can update your recepie and delete it from your profile. Also Integrated Ai assistant feature which help to user interactive.
 You can ask any thing with assistant.
-
-
 <img src="home/profile.png" alt="Image 1" width="35%" height="200" style="display;">
 
 
 ## Live 
-Code version is live [here](https://add-recipe-backend1.onrender.com/)
+Code version is live [here](https://add-recipe-backend.onrender.com/)
 
 
 1. **Install Dpendencies**
