@@ -11,7 +11,8 @@ If you're new to the application, start by navigating to the registration page t
 Here a first page after login
 
 <img src="home/Add_recepie.png" alt="Image 1" width="35%" height="200" style="display;">
-You can update your recepie and delete it from your profile.Also Integrated Ai assistant feature which help to user interactive.
+You can update your recepie and delete it from your profile. Also Integrated Ai assistant feature which help to user interactive.
+You can ask any thing with assistant.
 
 <img src="home/profile.png" alt="Image 1" width="35%" height="200" style="display;">
 
