@@ -217,7 +217,7 @@ def ai_assistant(request):
             query = data.get('query', '')
 
             generator = pipeline('text-generator', model='meta-llama/Meta-Llama-3.1-70B-Instruct')
-            outputs = generator(query, max_length=100, do_sample=True, temperature=0.9)
+            outputs = generator(query, max_length=500, do_sample=True, temperature=0.9)
 
             return JsonResponse({'response': outputs[0]['generated_text']})
         except json.JSONDecodeError:
