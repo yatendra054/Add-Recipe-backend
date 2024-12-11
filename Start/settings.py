@@ -80,7 +80,7 @@ DATABASES = {
         "NAME": BASE_DIR / "db.sqlite3",
     }
 }
-ALLOWED_HOSTS=['add-recipe-backend1.onrender.com']
+ALLOWED_HOSTS=['add-recipe-backend.onrender.com']
 
 # Password validation
 # https://docs.djangoproject.com/en/5.0/ref/settings/#auth-password-validators
