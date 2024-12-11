@@ -171,23 +171,23 @@
     const csrfToken = document.querySelector('[name=csrfmiddlewaretoken]').value;
 
     if (!queryInput.value.trim()) {
-        alert('Please enter a query!');
-        return;
+      alert('Please enter a query!');
+      return;
     }
 
     try {
         const response = await fetch('/ai_assistant/', {
             method: 'POST',
             headers: {
-              'Content-Type': 'application/json',
-              'X-CSRFToken': csrfToken  
+                'Content-Type': 'application/json',
+                'X-CSRFToken': csrfToken
             },
             body: JSON.stringify({ query: queryInput.value })
         });
 
         if (response.ok) {
           const data = await response.json();
-          document.getElementById('assistantResponse').innerText = data.response;
+          document.getElementById('assistantResponse').innerText = data.response; 
         } else {
           throw new Error('Error: Unable to process the request.');
         }
@@ -196,6 +196,7 @@
         document.getElementById('assistantResponse').innerText = 'Error: Something went wrong!';
       }
   }
+
  
 
 </script>  
