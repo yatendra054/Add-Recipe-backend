@@ -12,6 +12,11 @@ from django.contrib.auth import authenticate,login,logout
 from django.contrib.auth.decorators import login_required
 from recepe.utils import send_email_to_client
 import re
+import json
+from django.http import JsonResponse
+import transformers
+import torch
+from django.views.decorators.csrf import csrf_exempt
 from django.urls import reverse
 @login_required(login_url='/')
 def recepies(request):
@@ -92,6 +97,8 @@ def login_page(request):
 def logout_page(request):
     logout(request)
     return redirect('/')
+def About(request):
+    return render(request,"About.html")
 
 def register(request):
     if request.method=="POST":
@@ -201,3 +208,38 @@ def profile(request):
             messages.error(request, "No image file was uploaded.")
             return redirect(reverse('profile'))
     return render(request, "Profile.html", {"user_info": user_info,'page_title':'Profile'})
+
+
+@login_required(login_url='/')
+@csrf_exempt
+def ai_assistant(request):
+    if request.method == 'POST':
+        try:
+            data = json.loads(request.body)
+            query = data.get('query', '')
+
+            if not query:
+                return JsonResponse({'error': 'Query is required'}, status=400)
+            model_id = "meta-llama/Meta-Llama-3.1-70B-Instruct"
+
+            pipeline = transformers.pipeline(
+                "text-generation",
+                model=model_id,
+                model_kwargs={"torch_dtype": torch.bfloat16},
+                device_map="auto",
+            )
+            outputs = pipeline(
+                query,
+                max_new_tokens=256,
+                return_full_text=False,
+            )
+            return JsonResponse({'response': outputs[0]['generated_text']})
+
+        except json.JSONDecodeError:
+            return JsonResponse({'error': 'Invalid JSON format'}, status=400)
+        except Exception as e:
+            return JsonResponse({'error': str(e)}, status=500)
+
+    return JsonResponse({'error': 'Invalid request method'}, status=400)
+
+

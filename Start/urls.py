@@ -35,7 +35,8 @@ urlpatterns = [
     
     path("admin/", admin.site.urls),
     path("profile/",profile,name="profile"),
-    
+    path("About/",About,name="About"),
+    path('ai_assistant/', ai_assistant, name="ai_assistant"),
     path("forget/",forget,name="forget")
 ]
 
