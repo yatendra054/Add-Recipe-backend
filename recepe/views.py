@@ -14,7 +14,7 @@ from recepe.utils import send_email_to_client
 import re
 import json
 from django.http import JsonResponse
-from transformers import pipeline
+from transformers import AutoTokenizer, AutoModelForCausalLM, pipeline
 from django.views.decorators.csrf import csrf_exempt
 from django.urls import reverse
 @login_required(login_url='/')
@@ -200,7 +200,6 @@ def profile(request):
             
             resized_image = ContentFile(image_io.getvalue(), uploaded_image.name)
             user_info.profile_image.save(uploaded_image.name, resized_image, save=True)
-            messages.success(request, "Profile image uploaded and resized successfully.")
             
             return redirect(reverse('profile'))  
         else:
