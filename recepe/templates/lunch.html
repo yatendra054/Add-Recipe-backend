@@ -1,0 +1,106 @@
+{% extends 'base.html' %}
+
+{% block title %} Lunch Recipes {% endblock %}
+
+{%load static %}
+
+{% block content %}
+
+<link rel="stylesheet" href="{% static 'css/style1.css' %}">
+<h2> Lunch Food Recipes </h2>
+
+<div class="recipe-container">
+    <div class="recipe-card">
+        <img src="{% static 'images/tuna.jpg' %}" alt="Tuna Salad Tartines">
+        <div class="recipe-content">
+            <div>
+                <h3>1. Loaded Tuna Salad Tartines</h3>
+                <p class="short-description">
+                    Preheat broiler with an oven rack about 6 inches from heat. Drain tuna, reserving 2 tablespoons oil. Using a fork, gently flake tuna into large pieces in a medium bowl...
+                </p>
+                <p class="full-description">
+                    Preheat broiler with an oven rack about 6 inches from heat. Drain tuna, reserving 2 tablespoons oil. Using a fork, gently flake tuna into large pieces in a medium bowl. Add celery, shallot, herbs, mayonnaise, cornichons with brine, capers, reserved tuna oil, and 1/8 teaspoon salt to tuna. Gently stir until combined. Arrange bread slices in a single layer on a baking sheet. Broil until golden and toasted on top, about 2 minutes. Flip slices over and broil until toasted on other side, 1 to 2 minutes. Top toasted bread with sliced avocado and sprinkle with remaining 1/8 teaspoon salt. Spoon tuna mixture over toasts. Top with herbs.
+                </p>
+
+            </div>
+            <div class="read-more" onclick="toggleDescription(this)">Read More</div>
+        </div>
+    </div>
+
+
+    <div class="recipe-card">
+        <img src="{% static 'images/bacon.jpg' %}" alt="Bacon & Pimiento Grilled Cheese">
+        <div class="recipe-content">
+            <div>
+                <h3>2. Bacon & Pimiento Grilled Cheese</h3>
+                <p class="short-description">
+                    Heat a large nonstick skillet over medium. Cook bacon until crisp, about 8 minutes. Transfer to a paper-towel-lined plate and discard drippings...
+                </p>
+                <p class="full-description">
+                    Heat a large nonstick skillet over medium. Working in batches if needed, cook bacon, flipping often, until crisp, about 8 minutes. Transfer to a paper-towel-lined plate. Remove skillet from heat and discard drippings. Meanwhile, stir together Cheddar, cream cheese, pimientos, cayenne, onion powder, and 2 tablespoons mayonnaise in a medium bowl until combined. Spread 1 1/2 teaspoons mayonnaise on 1 side of each bread slice. Arrange 4 bread slices, mayonnaise side down, on a work surface. Spread evenly with Cheddar mixture. Top each with 1 tablespoon basil, 2 bacon slices, 2 tomato slices, and 1 more tablespoon basil. Top with remaining bread slices, mayonnaise side up. Heat skillet over medium. Cook 2 sandwiches until golden brown, 2 to 3 minutes per side. Remove from skillet and cook remaining 2 sandwiches. Slice in half and serve.
+                </p>
+
+            </div>
+            <div class="read-more" onclick="toggleDescription(this)">Read More</div>
+        </div>
+    </div>
+
+    <div class="recipe-card">
+        <img src="{% static 'images/carbonara.jpg' %}" alt="Carbonara Pizza">
+        <div class="recipe-content">
+            <div>
+                <h3>3. Carbonara Pizza</h3>
+                <p class="short-description">
+                    Preheat oven to 450°F with a rack in lower third position. Cook pancetta until golden and starting to crisp, about 6 minutes. Transfer to a paper-towel-lined plate to drain...
+                </p>
+                <p class="full-description">
+                    Preheat oven to 450°F with a rack in lower third position. Place pancetta in a large skillet. Cook over medium, stirring occasionally, until golden and starting to crisp, about 6 minutes. Remove from heat. Transfer pancetta to a paper-towel-lined plate to drain. Gently stretch dough into a 12-inch round on a lightly floured work surface. Transfer to a lightly floured baking sheet. Sprinkle evenly with mozzarella and Pecorino Romano, leaving a 3/4-inch border around edges. Top with cooked pancetta and sprinkle with pepper. Bake until crust is puffed but still pale and cheese is melted, about 8 minutes. Meanwhile, place egg and yolk in a small bowl or measuring cup (do not whisk). Carefully pull rack with pizza out from oven and tip eggs onto center of pizza. Using a fork, carefully spread egg white over a larger area to help eggs cook evenly. Return to oven and bake until whites are set and yolks are runny, about 5 minutes. Break yolks with a spoon and drizzle all over pizza, if desired. Top with chives, Pecorino Romano, and several grinds of pepper.
+                </p>
+            </div>
+            <div class="read-more" onclick="toggleDescription(this)">Read More</div>
+        </div>
+    </div>
+
+    <div class="recipe-card">
+        <img src="{% static 'images/tofu.jpg' %}" alt="Tofu Fried Rice">
+        <div class="recipe-content">
+            <div>
+                <h3>4. Tofu Fried Rice</h3>
+                <p class="short-description">
+                    Wrap tofu in a clean kitchen towel and press to remove excess moisture. Crumble tofu into small pieces...
+                </p>
+                <p class="full-description">
+                    Wrap tofu in a clean kitchen towel. Press to remove excess moisture. (It’s OK if tofu falls apart.) Place tofu in a medium bowl and crumble into small pieces. Heat 1/4 cup oil in a large nonstick skillet over medium. Add garlic, ginger, turmeric, and 1/4 cup raisins; cook, stirring often, until garlic is softened, about 2 minutes. Add crumbled tofu; cook, stirring constantly, until tofu absorbs turmeric oil, about 30 seconds. Add rice and remaining 2 tablespoons oil to skillet; stir until thoroughly combined. Spread rice in an even layer and cook, undisturbed, until rice and tofu are crisp in spots, about 3 minutes. Stir and gently press rice into an even layer again. Cook, undisturbed, until rice and tofu are crisp in spots, about 3 minutes. Remove from heat. Stir in cilantro, lemon juice, salt, and remaining 1/4 cup raisins. Serve drizzled with yogurt, if desired.
+                </p>
+
+            </div>
+            <div class="read-more" onclick="toggleDescription(this)">Read More</div>
+        </div>
+    </div>
+
+    <div class="recipe-card">
+        <img src="{% static 'images/risotto.jpg' %}" alt="Instant Pot Risotto With Peas & Crispy Salami">
+        <div class="recipe-content">
+            <div>
+                <h3>5. Instant Pot Risotto With Peas & Crispy Salami</h3>
+                <p class="short-description">
+                    Select sauté setting on a pressure multicooker (such as an Instant Pot). Add oil to cooker. Cook salami until crispy, about 5 minutes. Transfer to a towel-lined plate. Add shallot; cook until softened, about 1 minute...
+                </p>
+                <p class="full-description">
+                    Select sauté setting on a pressure multicooker (such as an Instant Pot). Select high temperature setting. Add oil to cooker. When oil is hot, add salami; cook, stirring often, until crispy, about 5 minutes. Transfer to a towel lined plate with a slotted spoon. Add shallot to cooker; cook, stirring constantly, until softened, about 1 minute. Add rice, salt, and paprika; cook, stirring constantly, until toasted, about 2 minutes. Stir in wine; cook, scraping bottom of cooker to loosen browned bits, until most of liquid has been absorbed, about 1 minute. Press cancel and stir in broth. Cover cooker with lid and lock in place. Cook on high pressure for 6 minutes. Quick-release pressure and remove lid from cooker. Stir in frozen peas, lemon zest, and half of salami. Stir until peas are bright green and tender, about 1 minute. Serve risotto topped with remaining salami and parsley. Drizzle with oil.
+                </p>
+            </div>
+            <div class="read-more" onclick="toggleDescription(this)">Read More</div>
+        </div>
+    </div>
+</div>
+
+<script>
+    function toggleDescription(button) {
+        const card = button.closest('.recipe-card');
+        card.classList.toggle('expanded');
+        button.textContent = card.classList.contains('expanded') ? 'Read Less' : 'Read More';
+    }
+</script>
+
+{% endblock %}

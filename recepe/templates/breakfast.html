@@ -1,0 +1,104 @@
+{% extends 'base.html' %}
+
+{% block title %}Breakfast Recipes{% endblock %}
+
+{% load static %}
+
+{% block content %}
+<link rel="stylesheet" href="{% static 'css/style1.css' %}">
+
+<h2>Breakfast Food Recipes</h2>
+
+<div class="recipe-container">
+
+    <div class="recipe-card">
+        <img src="{% static 'images/Tomato_egg.jpg' %}" alt="Tomato Egg Dish">
+        <div class="recipe-content">
+            <div>
+                <h3>1. Tomato and Feta Baked Eggs</h3>
+                <p class="short-description">
+                    Preheat oven to 450°F. Toss tomatoes with 1 tablespoon oil, smoked paprika, and 1/2 teaspoon each of salt and pepper on a rimmed baking sheet, then roast for 8 minutes...
+                </p>
+                <p class="full-description">
+                    Preheat oven to 450°F. Toss tomatoes with 1 tablespoon oil, smoked paprika, and 1/2 teaspoon each of salt and pepper on a rimmed baking sheet, then roast for 8 minutes. While roasting, crush coriander and cumin seeds using a mortar and pestle. Once tomatoes are done, sprinkle with feta and create 8 wells for the eggs. Add ground coriander and cumin seeds, and bake for 2 to 3 minutes until the cheese starts to melt. Crack an egg into each well and bake for another 3 to 5 minutes until the whites are set. Sprinkle with basil. Meanwhile, whisk lemon juice with the remaining tablespoon of oil, add greens, and 1/4 teaspoon each of salt and pepper, then toss to coat. Serve the baked eggs with the salad and toast.
+                </p>
+            </div>
+            <div class="read-more" onclick="toggleDescription(this)">Read More</div>
+        </div>
+    </div>
+
+    <div class="recipe-card">
+        <img src="{% static 'images/choclate.jpg' %}" alt="Chocolate-Zucchini Bran Muffins">
+        <div class="recipe-content">
+            <div>
+                <h3>2. Chocolate-Zucchini Bran Muffins</h3>
+                <p class="short-description">
+                    Preheat oven to 350°F and coat a 12-cup muffin pan with nonstick spray or line with cupcake liners. In a large bowl, whisk together flour, wheat bran, cocoa powder, baking soda, and salt. In a separate medium bowl, whisk together eggs, buttermilk, sugar, oil, and vanilla...
+                </p>
+                <p class="full-description">
+                    Preheat oven to 350°F and coat a 12-cup muffin pan with nonstick spray or line with cupcake liners. In a large bowl, whisk together flour, wheat bran, cocoa powder, baking soda, and salt. In a separate medium bowl, whisk together eggs, buttermilk, sugar, oil, and vanilla. Create a well in the center of the dry ingredients and gradually whisk in the buttermilk mixture until just combined. Fold in zucchini and 1/4 cup chocolate chips, then divide the batter among the muffin cups, filling each about 1/3 full. Top with the remaining 1/4 cup chocolate chips and bake for 25 to 30 minutes, or until a toothpick inserted into the center comes out mostly clean. Let cool in the pan for 10 minutes before transferring the muffins to a wire rack to cool completely.
+                </p>
+            </div>
+            <div class="read-more" onclick="toggleDescription(this)">Read More</div>
+        </div>
+    </div>
+
+
+    <div class="recipe-card">
+        <img src="{% static 'images/sweet_patato.jpg' %}" alt="Sweet Potato">
+        <div class="recipe-content">
+            <div>
+                <h3>3. Sweet Potato Breakfast Burritos</h3>
+                <p class="short-description">
+                    Heat 1 tablespoon oil in large skillet on medium. Add sweet potato and cook, stirring occasionally, until beginning to brown, 5 to 6 minutes. Add 2 tablespoons water, cover, and cook until tender, 2 minutes...
+                </p>
+                <p class="full-description">
+                    Heat 1 tablespoon oil in large skillet on medium. Add sweet potato and cook, stirring occasionally, until beginning to brown, 5 to 6 minutes. Add 2 tablespoons water, cover, and cook until tender, 2 minutes. Add onion, poblano, and 1/4 teaspoon each salt and pepper; cover and cook, stirring occasionally, until tender, 3 to 4 minutes. Stir in chili powder and cook until fragrant, 1 minute. Stir in black beans and remove from heat. Meanwhile, in bowl, beat eggs with 1/2 teaspoon each salt and pepper. Heat remaining tablespoon oil in large nonstick skillet on medium. Add eggs and cook, stirring with rubber spatula every few seconds, to desired doneness, 2 to 3 minutes for soft-scrambled eggs. Divide filling, cheese, and kale among tortillas. For each burrito, fold sides over filling, then roll up from bottom. If desired, individually wrap burritos with plastic and freeze up to 2 months. To reheat, remove and discard plastic. Wrap burrito in damp paper towel and microwave until heated through, about 3 minutes. Heat large nonstick skillet on medium and cook burrito until golden brown and crisp, 1 to 2 minutes per side.
+                </p>
+            </div>
+            <div class="read-more" onclick="toggleDescription(this)">Read More</div>
+        </div>
+    </div>
+
+    <div class="recipe-card">
+        <img src="{% static 'images/sweet1.jpg' %}" alt=" Almond-Buckwheat ">
+        <div class="recipe-content">
+            <div>
+                <h3>4. Almond-Buckwheat Granola with Yogurt and Berries</h3>
+                <p class="short-description">
+                    Heat oven to 300°F. Line rimmed baking sheet with parchment paper. In medium bowl, whisk together oil, maple syrup and salt...
+                </p>
+                <p class="full-description">
+                    Heat oven to 300°F. Line rimmed baking sheet with parchment paper. In medium bowl, whisk together oil, maple syrup and salt. Heat medium cast-iron skillet on medium-high. Add groats and toast, shaking and tossing often and adjusting heat as needed, until crisp and light golden brown, 2 to 4 minutes. Transfer to bowl with maple syrup mixture and toss to coat (it will sizzle), then stir in cinnamon and almonds. Spread mixture onto prepared baking sheet and bake, stirring halfway through, until golden brown, 15 to 20 minutes. Let cool. Serve granola with yogurt, berries and drizzle of maple syrup if desired.
+                </p>
+            </div>
+            <div class="read-more" onclick="toggleDescription(this)">Read More</div>
+        </div>
+    </div>
+
+    <div class="recipe-card">
+        <img src="{% static 'images/sandwich.jpg' %}" alt="Egg Sandwiches">
+        <div class="recipe-content">
+            <div>
+                <h3>5. Make-Ahead Egg Sandwiches</h3>
+                <p class="short-description">
+                    In a bowl, beat eggs with 1 Tbsp water and ¼ tsp each salt and pepper. Heat oil in a large nonstick skillet on medium heat...
+                </p>
+                <p class="full-description">
+                    In a bowl, beat eggs with 1 Tbsp water and ¼ tsp each salt and pepper. Heat oil in a large nonstick skillet on medium heat. Add eggs and cook, stirring with a rubber spatula every few seconds, to desired doneness — 2 to 3 minutes for medium soft eggs. Spoon onto bottom half of each muffin and top with cheese, spinach, and ham (if using). Sandwich with remaining muffin top.
+                </p>
+            </div>
+            <div class="read-more" onclick="toggleDescription(this)">Read More</div>
+        </div>
+    </div>
+</div>
+
+<script>
+    function toggleDescription(button) {
+        const card = button.closest('.recipe-card');
+        card.classList.toggle('expanded');
+        button.textContent = card.classList.contains('expanded') ? 'Read Less' : 'Read More';
+    }
+</script>
+
+{% endblock %}

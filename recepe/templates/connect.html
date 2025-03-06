@@ -1,0 +1,120 @@
+{% extends 'base.html' %}
+
+{% block title %}Connect Others{% endblock %}
+
+{% load static %}
+
+{% block content %}
+
+<style>
+    .profile-initials {
+        display: inline-block;
+        text-align: center;
+        line-height: 100px; 
+    }
+
+    .card {
+        transition: transform 0.2s;
+        border: 1px solid #e0e0e0;
+        border-radius: 10px;
+        overflow: hidden;
+    }
+
+    .card:hover {
+        transform: scale(1.05);
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    }
+
+    .card-body {
+        padding: 20px;
+    }
+
+    .card-title {
+        font-size: 1.25rem;
+        font-weight: bold;
+        margin-bottom: 10px;
+    }
+
+    .card-text {
+        margin-bottom: 5px;
+        font-size: 0.9rem;
+        color: #555;
+    }
+
+    .btn-primary {
+        margin-top: 15px;
+        width: 100%;
+    }
+
+    .btn-following {
+        background-color: #6c757d; 
+        border-color: #6c757d;
+    }
+
+    .alert-message {
+        color: red;
+        font-size: 0.9rem;
+        margin-top: 10px;
+    }
+
+    .container{
+        min-height: 69vh;
+    }
+</style>
+
+<div class="container">
+    <h1 class="text-center mb-4">Make Connection</h1>
+    <div class="row">
+        {% for info in Informations %}
+        <div class="col-md-4 mb-4">
+            <div class="card h-100">
+                <div class="card-body text-center">
+                   
+                    {% if info.profile_image %}
+                        <img src="{{ info.profile_image.url }}" class="rounded-circle" width="100" height="100" alt="Profile Image">
+                    {% else %}
+                        <div class="profile-initials rounded-circle d-flex justify-content-center align-items-center" style="width: 100px; height: 100px; background-color: #007bff; color: white; font-size: 24px;">
+                            {{ info.First_Name|first|upper }}
+                        </div>
+                    {% endif %}
+
+                    
+                    <h5 class="card-title mt-3">{{ info.First_Name }} {{ info.Last_Name }}</h5>
+                    <p class="card-text text-muted">@{{ info.User_Name }}</p>
+                    <p class="card-text">{{ info.Email }}</p>
+
+                    
+                    <button class="btn btn-primary follow-button" data-user-id="{{ info.user.id }}">Follow</button>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+
+<script>
+    document.querySelectorAll('.follow-button').forEach(button => {
+        button.addEventListener('click', function() {
+            {% if user.is_authenticated %}
+                const userId = this.getAttribute('data-user-id');
+                const button = this;
+
+                if (button.innerText === "Follow") {
+                    button.innerText = "Following";
+                    button.classList.remove('btn-primary');
+                    button.classList.add('btn-following');
+                } else {
+                    button.innerText = "Follow";
+                    button.classList.remove('btn-following');
+                    button.classList.add('btn-primary');
+                }
+
+            {% else %}
+                alert('Please login to follow this user.');
+                window.location.href = "/login/"; 
+            {% endif %}
+        });
+    });
+</script>
+
+{% endblock %}

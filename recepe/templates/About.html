@@ -1,32 +1,86 @@
 {% extends "base.html" %}
 
 {% block title %}About Us{% endblock %}
+{% load static %}
 
 {% block content %}
-<div class="container py-5">
-    <div class="text-center mb-2">
-        <h1>About Us</h1>
+<link rel="stylesheet" href="{% static 'css/style.css' %}">
+
+<div class="about-section">
+  <div class="container">
+    <div class="text-center mb-5">
+      <h1 class="about-heading">About Us</h1>
     </div>
     <div class="row justify-content-center">
-        <div class="col-md-8 align-items-center">
-            <p>
-                Welcome to our platform! Here, you can unleash your culinary creativity by adding your unique recipes and sharing them with your friends and colleagues. 
-                This application is designed to inspire and enhance your cooking skills, helping you build a personal collection of delightful dishes.
-            </p>
-            <p>
-                By sharing your recipes, you not only showcase your talent but also inspire others to explore new ideas in the kitchen. 
-                Let's create a vibrant community of food enthusiasts together!
-            </p>
+      <div class="col-md-8">
+        <p class="about-text">
+          Welcome to our platform! Here, you can unleash your culinary creativity by adding your unique recipes and sharing them with your friends and colleagues. 
+          This application is designed to inspire and enhance your cooking skills, helping you build a personal collection of delightful dishes.
+        </p>
+        <p class="about-text">
+          By sharing your recipes, you not only showcase your talent but also inspire others to explore new ideas in the kitchen. 
+          Let's create a vibrant community of food enthusiasts together!
+        </p>
+      </div>
+    </div>
+    <div class="why-choose-us text-center">
+      <h3>Why Choose Us?</h3>
+      <div class="row justify-content-center">
+        <div class="col-md-5 col-lg-3">
+          <div class="feature-card">
+            <i class="fas fa-book-open feature-icon"></i>
+            <h4 class="feature-title">Create & Manage Recipes</h4>
+            <p class="feature-description">Build and organize your personalized recipe collection with ease.</p>
+          </div>
         </div>
+        <div class="col-md-5 col-lg-3">
+          <div class="feature-card">
+            <i class="fas fa-share-alt feature-icon" onclick="shareRecepie()"></i>
+            <h4 class="feature-title">Share Your Creations</h4>
+            <p class="feature-description">Share your culinary masterpieces with friends and family.</p>
+          </div>
+        </div>
+        <div class="col-md-5 col-lg-3">
+          <div class="feature-card">
+            <i class="fas fa-users feature-icon"></i>
+            <h4 class="feature-title">Join a Community</h4>
+            <p class="feature-description">Connect with a vibrant community of food lovers.</p>
+          </div>
+        </div>
+        <div class="col-md-5 col-lg-3">
+          <div class="feature-card">
+            <i class="fas fa-lightbulb feature-icon"></i>
+            <h4 class="feature-title">Enhance Creativity</h4>
+            <p class="feature-description">Discover new ideas and improve your cooking skills.</p>
+          </div>
+        </div>
+      </div>
     </div>
-    <div class="text-center mt-5">
-        <h3>Why Choose Us?</h3>
-        <ul class="list-unstyled mt-3">
-            <li>📌 Create and manage your personalized recipe collection.</li>
-            <li>📌 Share your culinary creations with friends and family.</li>
-            <li>📌 Connect with a community of like-minded food enthusiasts.</li>
-            <li>📌 Enhance your creativity and cooking skills.</li>
-        </ul>
-    </div>
+  </div>
 </div>
-{% endblock %}
+
+<script>
+  function shareRecepie() {
+    var isAuthenticated = "{{ request.user.is_authenticated}}";
+
+    if(isAuthenticated=="true"){
+      if (navigator.share) {
+        navigator.share({
+          title: 'Share Your Recipe',
+          text: 'Check out this amazing recipe on Recipe Hub!',
+          url: window.location.href
+        }).then(() => {
+          console.log('Share Your Creations');
+        }).catch((error) => {
+          console.error('Error sharing:', error);
+        });
+      } else {
+        alert("Sharing is not supported on this browser.");
+      }
+    } else {
+      alert("Please register our self and login then share your profile.");
+    }
+  }
+</script>
+
+{%endblock%}

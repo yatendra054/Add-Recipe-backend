@@ -1,42 +1,47 @@
 {% extends "base.html" %}
 
-{% block title %}Recepies_page{% endblock %}
+{% block title %}Recipes Page{% endblock %}
 
 {% block content %}
- <title>Add recepie</title>
- <style>
-  .containerz{
+<style>
+  .containerz {
     height: 100%;
     width: 100%;
     background-image: url("https://images.rawpixel.com/image_800/cHJpdmF0ZS9sci9pbWFnZXMvd2Vic2l0ZS8yMDIyLTA1L3B4MTM2OTgxMy1pbWFnZS1rd3Z4eHA5MS5qcGc.jpg");
     background-repeat: no-repeat;
-    background-size: 100% 100%;
+    background-size: cover;
     background-attachment: fixed;
     background-position: center;
     margin: 0;
-    overflow-y: hidden;
-    
+    padding: 20px;
+    overflow-y: auto;
   }
-  .Start{
-    margin: 0 auto;
-    margin:0 auto;
-    background-color: rgba(255, 255, 255, 0.4);
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-  }
-  .commen{
-    background-color:transparent;
-  }
-    
-  .Search_star{
-    margin-left: 0;
 
+  .Start {
+    margin: 0 auto;
+    background-color: rgba(255, 255, 255, 0.8);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    border-radius: 10px;
+    padding: 20px;
+    max-width: 800px;
   }
-  .show{
-    background-color: rgba(226, 232, 240, 0.7); 
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-    font-size:18px;
-    background-color: rgb(255 237 213);
+
+  .commen {
+    background-color: transparent;
   }
+
+  .Search_star {
+    margin-left: 0;
+  }
+
+  .show {
+    background-color: rgba(255, 255, 255, 0.9);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    font-size: 18px;
+    border-radius: 10px;
+    overflow: hidden;
+  }
+
   .ai-assistant-button {
     position: fixed;
     bottom: 20px;
@@ -53,7 +58,13 @@
     display: flex;
     align-items: center;
     justify-content: center;
+    transition: background-color 0.3s ease;
   }
+
+  .ai-assistant-button:hover {
+    background-color: #0056b3;
+  }
+
   .ai-assistant-modal {
     display: none;
     position: fixed;
@@ -67,6 +78,7 @@
     border-radius: 10px;
     z-index: 1000;
   }
+
   .modal-overlay {
     display: none;
     position: fixed;
@@ -77,129 +89,173 @@
     background: rgba(0, 0, 0, 0.5);
     z-index: 999;
   }
+
+  .form-label {
+    font-weight: bold;
+    color: #333;
+  }
+
+  .form-control {
+    border-radius: 5px;
+    border: 1px solid #ddd;
+    padding: 10px;
+    font-size: 16px;
+  }
+
+  .btn {
+    border-radius: 5px;
+    padding: 10px 20px;
+    font-size: 16px;
+    transition: background-color 0.3s ease;
+  }
+
+  .btn-primary {
+    background-color: #007bff;
+    border: none;
+  }
+
+  .btn-primary:hover {
+    background-color: #0056b3;
+  }
+
+  .btn-secondary {
+    background-color: #6c757d;
+    border: none;
+  }
+
+  .btn-secondary:hover {
+    background-color: #5a6268;
+  }
+
+  .btn-danger {
+    background-color: #dc3545;
+    border: none;
+  }
+
+  .btn-danger:hover {
+    background-color: #c82333;
+  }
+
+  .btn-success {
+    background-color: #28a745;
+    border: none;
+  }
+
+  .btn-success:hover {
+    background-color: #218838;
+  }
+
+  .mic-button {
+    background-color: #ffc107;
+    border: none;
+    color: #333;
+  }
+
+  .mic-button:hover {
+    background-color: #e0a800;
+  }
+
+  table {
+    width: 100%;
+    border-collapse: collapse;
+  }
+
+  th, td {
+    padding: 12px;
+    text-align: left;
+    border-bottom: 1px solid #ddd;
+  }
+
+  th {
+    background-color:rgb(241, 228, 228);
+    color: black;
+  }
+
+  tr:hover {
+    background-color: #f1f1f1;
+  }
+
+  img {
+    border-radius: 5px;
+  }
 </style>
 
 <div class="containerz">
-    <form class="col-6 max-auto card p-3 shadow-lg mt-1 Start" method="post" enctype="multipart/form-data">
-        {% csrf_token %}
-        <h1>ADD RECEPIES</h1>
-        <div class="mb-3">
-          <label for="exampleInputEmail1" class="form-label">Recepies_name</label>
-          <input name="Recepies_name" required type="text" class="form-control">
-        </div>
-        <div class="mb-3">
-          <label for="exampleInputEmail1" class="form-label">Recepies_description</label>
-          <textarea name="Recepies_description" class="form-control" required></textarea>
-          <button type="button" class="btn btn-secondary mt-2 mic-button">🎤 Speak</button>
-        </div>
-        <div class="mb-3">
-            <label for="exampleInputEmail1" class="form-label">Country</label>
-            <input name="Country" class="form-control" required type="text">
-        </div>
-        <div class="mb-3">
-            <label for="exampleInputEmail1" class="form-label">Dish_Image</label>
-            <input name="Dish_Image" type="file" class="form-control">
-        </div>
-        <button type="submit" class="btn btn-primary">Add Recepies</button>
-      </form>
+  <form class="col-6 max-auto card p-3 shadow-lg mt-1 Start" method="post" enctype="multipart/form-data">
+    {% csrf_token %}
+    <h1 class="text-center">Add Recipe</h1>
+    <div class="mb-3">
+      <label for="exampleInputEmail1" class="form-label">Recipe Name</label>
+      <input name="Recepies_name" required type="text" class="form-control" placeholder="Enter recipe name">
+    </div>
+    <div class="mb-3">
+      <label for="exampleInputEmail1" class="form-label">Recipe Description</label>
+      <textarea name="Recepies_description" class="form-control" required placeholder="Enter recipe description"></textarea>
+      <button type="button" class="btn btn-secondary mt-2 mic-button">🎤 Speak</button>
+    </div>
+    <div class="mb-3">
+      <label for="exampleInputEmail1" class="form-label">Country</label>
+      <input name="Country" class="form-control" required type="text" placeholder="Enter country">
+    </div>
+    <div class="mb-3">
+      <label for="exampleInputEmail1" class="form-label">Dish Image</label>
+      <input name="Dish_Image" type="file" class="form-control">
+    </div>
+    <button type="submit" class="btn btn-primary">Add Recipe</button>
+  </form>
 
-      <hr>
-      {% if recepies %}
-        <div class="mt">
-          <div class="col-6 Search_star" >
-            <form>
-              <div class="mb-2">
-                <label for="exampleInputEmail1" class="form-label" style="color: black; font-size: 1.5em;">Search Food</label>
-                <input name="search"  type="text" class="form-control commen">
-                <button type="submit" class="btn btn-primary mt-1">Search</button>
-              </div>
-              
-            </form>
+  <hr>
+
+  {% if recepies %}
+    <div class="mt-4">
+      <div class="col-6 Search_star">
+        <form>
+          <div class="mb-2">
+            <label for="exampleInputEmail1" class="form-label" style="color: black; font-size: 1.5em;">Search Food</label>
+            <input name="search" type="text" class="form-control commen" placeholder="Search for recipes">
+            <button type="submit" class="btn btn-primary mt-2">Search</button>
           </div>
-        </div>
-                                  
-        <table class="mt-1 mb-2 show">
-          <thead>
-            <tr>
-              <th scope="col">Id</th>
-              <th scope="col">Recepies Name</th>
-              <th scope="col">Recepies Description</th>
-              <th scope="col">Country</th>
-              <th scope="col">Dish Image</th>
-              <th scope="col">Action</th>
-            </tr>
-          </thead>
-          <tbody style="font-style: italic;">
-            {% for recepie in recepies %}
-            <tr>
-              <th scope="row">{{forloop.counter}}</th>
-              <td>{{recepie.Recepies_name}}</td>
-              <td>{{recepie.Recepies_description}}</td>
-              <td>{{recepie.Country}}</td>
-              <td>
-                <img src="/media/{{recepie.Dish_Image}}" style="height: 100px ; width: 120px"></td>
-              <td>
-                <a href="/delete_recepie/{{recepie.id}}/" class="btn btn-danger m-2">Delete</a>
-                <a href="/update_recepie/{{recepie.id}}/" class="btn btn-success m-2">Update</a></td>
-            </tr>
-            {% endfor %}
-          </tbody>
-        </table>
-      {% else %}
-        <p style="color: red; text-align: center; font-size: 1.2em;">No recipes found.</p>
-      {% endif %}  
-            
-</div>
-  <input type="hidden" name="csrfmiddlewaretoken" value="{{ csrf_token }}">
-  <button class="ai-assistant-button" onclick="toggleAssistantModal()">AI</button>  
-  <div class="modal-overlay" onclick="toggleAssistantModal()"></div>
-  <div class="ai-assistant-modal" id="aiModal">
-      <h2>AI Assistant</h2>
-      <textarea id="assistantInput" class="form-control" rows="3" placeholder="Ask something..."></textarea>
-      <button class="btn btn-primary mt-3" onclick="sendToAssistant()">Submit</button>
-      <div id="assistantResponse" class="mt-3"></div>
+        </form>
+      </div>
+    </div>
+
+    <table class="mt-4 mb-4 show">
+      <thead>
+        <tr>
+          <th scope="col">Id</th>
+          <th scope="col">Recipe Name</th>
+          <th scope="col">Recipe Description</th>
+          <th scope="col">Country</th>
+          <th scope="col">Dish Image</th>
+          <th scope="col">Action</th>
+        </tr>
+      </thead>
+      <tbody style="font-style: italic;">
+        {% for recepie in recepies %}
+        <tr>
+          <th scope="row">{{forloop.counter}}</th>
+          <td>{{recepie.Recepies_name}}</td>
+          <td>{{recepie.Recepies_description}}</td>
+          <td>{{recepie.Country}}</td>
+          <td>
+            <img src="/media/{{recepie.Dish_Image}}" style="height: 100px; width: 120px; border-radius: 5px;">
+          </td>
+          <td>
+            <a href="/delete_recepie/{{recepie.id}}/" class="btn btn-danger m-1">Delete</a>
+            <a href="/update_recepie/{{recepie.id}}/" class="btn btn-success m-1">Update</a>
+          </td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  {% else %}
+    <p style="color: red; text-align: center; font-size: 1.2em;">No recipes found.</p>
+  {% endif %}
 </div>
 
-<script>
-  function toggleAssistantModal() {
-    const modal = document.getElementById('aiModal');
-    const overlay = document.querySelector('.modal-overlay');
-    modal.style.display = modal.style.display === 'block' ? 'none' : 'block';
-    overlay.style.display = overlay.style.display === 'block' ? 'none' : 'block';
-  }
-  async function sendToAssistant() {
-    const queryInput = document.getElementById('assistantInput');
-    const csrfToken = document.querySelector('[name=csrfmiddlewaretoken]').value;
-
-    if (!queryInput.value.trim()) {
-      alert('Please enter a query!');
-      return;
-    }
-
-    try {
-        const response = await fetch('/ai_assistant/', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-                'X-CSRFToken': csrfToken
-            },
-            body: JSON.stringify({ query: queryInput.value })
-        });
-
-        if (response.ok) {
-          const data = await response.json();
-          document.getElementById('assistantResponse').innerText = data.response; 
-        } else {
-          throw new Error('Error: Unable to process the request.');
-        }
-    } catch (error) {
-        console.error('Error:', error);
-        document.getElementById('assistantResponse').innerText = 'Error: Something went wrong!';
-      }
-  }
-
- 
-
-</script>  
+<button class="ai-assistant-button">🤖</button>
+<div class="ai-assistant-modal">
+</div>
+<div class="modal-overlay"></div>
 
 {% endblock %}

@@ -12,12 +12,16 @@ from django.contrib.auth import authenticate,login,logout
 from django.contrib.auth.decorators import login_required
 from recepe.utils import send_email_to_client
 import re
-import json
-from django.http import JsonResponse
-from transformers import AutoTokenizer, AutoModelForCausalLM, pipeline
+from .models import *
 from django.views.decorators.csrf import csrf_exempt
 from django.urls import reverse
-@login_required(login_url='/')
+
+
+def home(request):
+    return render(request,"home.html")
+
+
+@login_required(login_url='/login')
 def recepies(request):
     if request.method=="POST":
         Dish_Image = request.FILES.get("Dish_Image")
@@ -39,7 +43,7 @@ def recepies(request):
     context ={'recepies':queryset}
     return render(request , "recepie.html",context)
 
-@login_required(login_url='/')
+@login_required(login_url='/login')
 def update_recepie(request,id):
     queryset = get_object_or_404(Recepies,id = id,user=request.user)
     if request.method=="POST":
@@ -77,16 +81,16 @@ def login_page(request):
         
         if not username or not password:
             messages.error(request,"Please login  with your username and password")
-            return redirect('/')
+            return redirect('/login')
         
         if not User.objects.filter(username = username).exists():
             messages.error(request,"Invalid Username")
-            return redirect('/')
+            return redirect('/login')
         
         user = authenticate(username = username, password = password)
         if user is None:
             messages.error(request, "Invalid Password")
-            return redirect('/')
+            return redirect('/login')
         else:
             login(request,user)
             return redirect('/recepies/')
@@ -95,7 +99,7 @@ def login_page(request):
 
 def logout_page(request):
     logout(request)
-    return redirect('/')
+    return redirect('/login')
 def About(request):
     return render(request,"About.html")
 
@@ -174,7 +178,7 @@ def forget(request):
         return redirect('/')
         
     return render(request,"foreget.html")
-@login_required(login_url='/')
+@login_required(login_url='/login')
 def profile(request):
     user_info,created= UserInformation.objects.get_or_create(user=request.user)
     
@@ -207,23 +211,21 @@ def profile(request):
             return redirect(reverse('profile'))
     return render(request, "Profile.html", {"user_info": user_info,'page_title':'Profile'})
 
-@csrf_exempt
-@login_required(login_url='/')
-def ai_assistant(request):
-    if request.method == 'POST':
-        try:
-            data = json.loads(request.body)
-            query = data.get('query', '')
+def breakfast(request):
+    
+    return render(request,"breakfast.html")
 
-            generator = pipeline('text-generator', model='meta-llama/Meta-Llama-3.1-70B-Instruct')
-            outputs = generator(query, max_length=500, do_sample=True, temperature=0.9)
+def lunch(request):
+    return render(request,"lunch.html")
 
-            return JsonResponse({'response': outputs[0]['generated_text']})
-        except json.JSONDecodeError:
-            return JsonResponse({'error': 'Invalid JSON format'}, status=400)
-        except Exception as e:
-            return JsonResponse({'error': str(e)}, status=500)
-    return JsonResponse({'error': 'Invalid request method'}, status=400)
+def dinner(request):
+    return render(request,"dinner.html")
 
 
-
+def connect(request):
+    Informations=UserInformation.objects.all()
+    
+    context={
+        "Informations":Informations
+    }
+    return render(request,"connect.html",context)

@@ -1,0 +1,143 @@
+{% extends "base.html" %}
+{% block title %}Recipe Hub{% endblock %}
+
+{% load static %}
+
+{% block content %}
+<link rel="stylesheet" href="{% static 'css/style.css' %}">
+
+<!-- Hero Section -->
+<div class="hero">
+    <div class="hero-content">
+        <h2>Your Culinary Journey <br><span style="color: #e87c7c;">Begins Here</span></h2>
+        <p class="lead">Discover & Share Amazing Recipes from Around the World</p>
+        <button class="btn-login" onclick="redirectToPage('{% if request.user.is_authenticated %}/recepies/{% else %}/register/{% endif %}')"><i class="fas fa-utensils"></i>Get Started</button>
+    </div>
+    <div class="addimage">
+        <img src="{% static 'images/image_plate-removebg-preview.png' %}" alt="image">
+    </div>    
+</div>
+
+
+<div class="container">
+    <h2 class="section-title">Featured Recipes</h2>
+    <div class="slider-container">
+        <div class="slider-track">
+            {% for i in "123" %} 
+                <div class="slider-item"><img src="{% static 'images/momos.jpeg' %}" alt="Momos"></div>
+                <div class="slider-item"><img src="{% static 'images/chicken-tikka.jpg' %}" alt="Chicken Tikka"></div>
+                <div class="slider-item"><img src="{% static 'images/Chole_bhature.jpg' %}" alt="Chole Bhature"></div>
+                <div class="slider-item"><img src="{% static 'images/sandwich-recipes.jpg' %}" alt="Sandwich"></div>
+                <div class="slider-item"><img src="{% static 'images/Noodles.jpeg' %}" alt="Noodles"></div>
+                <div class="slider-item"><img src="{% static 'images/paani-puri.jpg' %}" alt="Paani Puri"></div>
+            {% endfor %}
+        </div>
+    </div>
+
+    <h2 class="section-title">Trending Now</h2>
+    <div class="trending-recipe">
+        <div class="recipe-card" onclick="redirectToPage('{% if request.user.is_authenticated %}/recipe-detail/1/{% else %}/register/{% endif %}')">
+            <img src="{% static 'images/CubanSandwich.jpg' %}" alt="Cuban Sandwich">
+            <div class="recipe-card-body">
+                <h5>Cuban Sandwich</h5>
+                <p><b>S</b> Suman Fiji</p>
+            </div>
+        </div>
+        <div class="recipe-card" onclick="redirectToPage('{% if request.user.is_authenticated %}/recipe-detail/2/{% else %}/register/{% endif %}')">
+            <img src="{% static 'images/Vada Pav.jpg' %}" alt="Vada Pav">
+            <div class="recipe-card-body">
+                <h5>Vada Pav</h5>
+                <p><b>R</b> Ram Lal</p>
+            </div>
+        </div>
+        <div class="recipe-card" onclick="redirectToPage('{% if request.user.is_authenticated %}/recipe-detail/3/{% else %}/register/{% endif %}')">
+            <img src="{% static 'images/idli-sambar.jpg' %}" alt="Idli and Sambar">
+            <div class="recipe-card-body">
+                <h5>Idli and Sambar</h5>
+                <p><b>N</b> Nisha Singh</p>
+            </div>
+        </div>
+
+        <div class="recipe-card" onclick="redirectToPage('{% if request.user.is_authenticated %}/recipe-detail/3/{% else %}/register/{% endif %}')">
+            <img src="{% static 'images/paneer_palak.jpg' %}" alt="Paneer Palak">
+            <div class="recipe-card-body">
+                <h5>Paneer Palak</h5>
+                <p><b>Y</b> Yash Raj</p>
+            </div>
+        </div>
+
+        <div class="recipe-card" onclick="redirectToPage('{% if request.user.is_authenticated %}/recipe-detail/3/{% else %}/register/{% endif %}')">
+            <img src="{% static 'images/Macher_jhol.jpg' %}" alt="Marcher Jhol">
+            <div class="recipe-card-body">
+                <h5>Marcher Jhol</h5>
+                <p><b>A</b> Ankita Bose</p>
+            </div>
+        </div>
+        <div class="recipe-card" onclick="redirectToPage('{% if request.user.is_authenticated %}/recipe-detail/3/{% else %}/register/{% endif %}')">
+            <img src="{% static 'images/Dal_Dhokli.jpeg' %}" alt="Dal Dhokli">
+            <div class="recipe-card-body">
+                <h5>Dal Dhokli</h5>
+                <p><b>D</b> Daya Patel</p>
+            </div>
+        </div>
+    </div>
+    <h3 class="section-title">Dish Categories</h3>
+    <div class="Dish-Cateogry">
+        <div class="dish card">
+            <a href="/breakfast/"><img src="{% static 'images/Breakfast.jpeg' %}" alt="Breakfast"></a>
+            <h4>Breakfast Dish</h4>
+        </div>
+        <div class="dish card">
+            <a href="/lunch/"><img src="{% static 'images/lunch.jpg' %}" alt="Lunch" ></a>
+            <h4>Lunch Dish</h4>
+        </div>
+        <div class="dish card">
+            <a href="/dinner/"> <img src="{% static 'images/Dinner.jpg' %}" alt="Dinner"></a>
+            <h4>Dinner Dish</h4>
+        </div>
+    </div> 
+    
+    
+    <div class="share-section">
+        <div class="share-content">
+            <blockquote>
+                "Cooking is an art, but all art requires knowing something about the techniques and materials."  
+                <span>- Nathan Myhrvold</span>
+            </blockquote>
+            <button class="btn-share" onclick="shareRecipe()">Share Your Recipe</button>
+        </div>
+        <div class="share-image">
+            <img src="{% static 'images/Share.jpg' %}" alt="Cooking Together">
+        </div>
+    </div>
+</div>
+
+<script>
+    function redirectToPage(url) {
+        window.location.href = url;
+    }
+    function shareRecipe() {
+        var isAuthenticated = "{{ request.user.is_authenticated}}";
+
+        if(isAuthenticated=="true"){
+            if (navigator.share) {
+                navigator.share({
+                    title: 'Share Your Recipe',
+                    text: 'Check out this amazing recipe on Recipe Hub!',
+                    url: window.location.href
+                }).then(() => {
+                    console.log('Recipe shared successfully!');
+                }).catch((error) => {
+                    console.error('Error sharing:', error);
+                });
+            } else {
+                alert("Sharing is not supported on this browser.");
+            }
+        } else{
+            alert("Please register our self and login then share your profile.");
+
+        }
+    }
+</script>
+
+{% endblock %}

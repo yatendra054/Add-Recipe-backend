@@ -11,8 +11,18 @@
         border: 1px solid black;
         }
         .show{
-            background-color: transparent;
+            background-color:linear-gradient(45deg, #e87c7c);
         }
+        nav a.btn {
+            transition: background-color 0.3s ease, transform 0.2s ease;
+        }
+        
+        nav a.btn:hover {
+            background-color: #0056b3 !important; 
+            color: white !important;
+            transform: scale(1.05); 
+        }
+        
         .sav{
             margin-right: 2px;
         }
@@ -23,7 +33,6 @@
         footer {
             background-color: rgb(222, 226, 230);
             padding: 20px;
-            margin: 0;
             text-align: center;
         }
         
@@ -36,25 +45,27 @@
     </style>
 </head>
 <body>
-    <nav class="navbar show bg-light-blue">
+    <nav class="navbar show ">
         <div class="container-fluid w-full">
           <a class="navbar-brand"><i class="fa-solid fa-wheat-awn"></i>Recepie</a>
           <div class="d-flex align-items-center">
-            <a href="/About/" class="btn btn-info me-2" type="submit">About</a>
+
+            <a href="/" class="btn btn me-2" type="submit">Home</a>
+            <a href="/connect/" class="btn btn me-2" type="submit">Connect</a>
+            <a href="/About/" class="btn btn me-2" type="submit">About</a>
           <div role="search">  
         
             {% if request.user.is_authenticated %}
                 {% if page_title ==  'Profile' %}
-                    <a href="/recepies/" class="btn btn-primary" type="submit">Recepie</a>
-                    <a href="/logout/" class="btn btn-success" type="submit"><i class="fa-solid fa-users"></i>Logout</a>
+                    <a href="/recepies/" class="btn btn" type="submit">Recepie</a>
+                    <a href="/logout/" class="btn btn" type="submit"><i class="fa-solid fa-users"></i>Logout</a>
                 {% else %}  
-                <a href="/profile/" class="btn btn-info" type="submit"><i class="fa-solid fa-user"></i> Profile</a>
-                <a href="/logout/" class="btn btn-success" type="submit"><i class="fa-solid fa-users"></i>Logout</a>
+                <a href="/profile/" class="btn btn" type="submit"><i class="fa-solid fa-user"></i> Profile</a>
+                <a href="/logout/" class="btn btn" type="submit"><i class="fa-solid fa-users"></i>Logout</a>
                 {% endif %}
                 
             {% else %}
-                <a href="/" class="btn btn-success" type="submit"><i class="fa-solid fa-users"></i>Login</a>
-                <a href="/register/" class="btn btn-primary" type="submit">Register</a>
+                <a href="/login/" class="btn btn" type="submit"><i class="fa-solid fa-users"></i>Login</a>
             </div>
             {% endif %}
           </div> 
@@ -67,12 +78,13 @@
     {% endblock %}
     </main>
     <footer>
-        <div style="margin-bottom: 5px;">
+        <div style="margin-bottom: 8px;">
             <a class="navbar-brand sav" href="/" style="font-size: 28px;">Recepie <i class="fa-solid fa-wheat-awn"></i></a>
         </div>
         <div style="margin-bottom: 25px;">
             <a href="/About/" style="margin-right: 15px; text-decoration: none; color: #007bff;">About</a>
-            <a href="/register/" style="margin-right: 15px; text-decoration: none; color: #007bff;">Register</a>
+            <a href="/connect/" style="margin-right: 15px; text-decoration: none; color: #007bff;">Connect</a>
+            <a href="/" style="margin-right: 15px; text-decoration: none; color: #007bff;">Home</a>
         </div>
         <div>
             <blockquote style="font-style: italic; color: #000; text-align: center;">

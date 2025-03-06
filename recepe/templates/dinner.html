@@ -1,0 +1,108 @@
+{% extends 'base.html' %}
+
+{% block title %} Dinner Recipes {% endblock %}
+
+{%load static %}
+
+{% block content %}
+<link rel="stylesheet" href="{% static 'css/style1.css' %}">
+<h2> Dinner Food Recipes </h2>
+
+<div class="recipe-container">
+
+    <div class="recipe-card">
+        <img src="{% static 'images/Bisi_Bele_Bath.jpg' %}" alt="Bisi bele bath">
+        <div class="recipe-content">
+            <div>
+                <h3>1. Bisi bele bath</h3>
+                <p class="short-description">
+                    Soak rice and dal separately for 30 minutes, then pressure cook for 5 whistles on medium flame, along with tamarind for easy juice extraction. Mash the cooked ingredients and extract tamarind juice with ¾ cup water. Peel and cube potatoes and carrots...
+                </p>
+                <p class="full-description">
+                    Soak rice and dal separately for 30 minutes, then pressure cook for 5 whistles on medium flame, along with tamarind for easy juice extraction. Mash the cooked ingredients and extract tamarind juice with ¾ cup water. Peel and cube potatoes and carrots, and boil with mochai (field beans) until nearly cooked. Fry cashew nuts in ghee until golden, then roast red chilli, coriander seeds, urad dal, chana dal, asafoetida, cinnamon, clove, marathi moggu, cumin seeds, and coconut in the same pan until golden. Grind the roasted spices into a fine powder. Fry small onions in ghee until transparent and add to the boiled veggies. Pour in tamarind extract, turmeric, salt, and jaggery, then add the powdered spices and bring to a boil. Stir in the cooked rice and dal mixture, and cook on medium flame to avoid sticking or burning. Once heated through, add fried cashews and switch off the flame.
+                </p>
+
+            </div>
+            <div class="read-more" onclick="toggleDescription(this)">Read More</div>
+        </div>
+    </div>
+
+    <div class="recipe-card">
+        <img src="{% static 'images/kara.jpg' %}" alt="Kara kuzhambu">
+        <div class="recipe-content">
+            <div>
+                <h3>2. Kara kuzhambu</h3>
+                <p class="short-description">
+                    Chop one onion roughly and another onion and tomato finely, and peel the garlic. Soak tamarind in ½ cup boiling hot water for 30 minutes and extract the tamarind juice by adding more water, making a total of 1 & ½ cups...
+                </p>
+                <p class="full-description">
+                    Chop one onion roughly and another onion and tomato finely, and peel the garlic. Soak tamarind in ½ cup boiling hot water for 30 minutes and extract the tamarind juice by adding more water, making a total of 1 & ½ cups. In a kadai, heat oil and temper with the items listed under ‘to temper’ in order. Add garlic and roughly chopped onion, frying until transparent. Then add tomatoes and fry until soft. Pour the tamarind extract, water, salt, turmeric, and sambar powder. Add drumstick cut into desired size and let it boil for 4 minutes. Then add brinjal and bring to boil. Grind coconut and another onion smoothly with a little water and add it to the kuzhambu. Let it boil until the brinjal gets cooked and the kuzhambu thickens. Finally, add pepper powder and jaggery, then transfer to the serving bowl.
+                </p>
+
+            </div>
+            <div class="read-more" onclick="toggleDescription(this)">Read More</div>
+        </div>
+    </div>
+
+    <div class="recipe-card">
+        <img src="{% static 'images/kurma.jpg' %}" alt=" Vegetable Kurma">
+        <div class="recipe-content">
+            <div>
+                <h3>3. Vegetable Kurma</h3>
+                <p class="short-description">
+                    Chop the vegetables into fine cubes and finely chop the onions and tomatoes. Grind the ingredients under "To grind" to a smooth paste. Heat oil in a small pressure cooker or pan and add the tempering items under "to temper"...
+                </p>
+                <p class="full-description">
+                    Chop the vegetables into fine cubes and finely chop the onions and tomatoes. Grind the ingredients under "To grind" to a smooth paste. Heat oil in a small pressure cooker or pan and add the tempering items under "to temper". Once the cumin splutters, add curry leaves, then onions, and fry for a minute. Add the ginger garlic paste and fry on low flame until the raw smell disappears. Add tomatoes and salt, and fry. Then, add red chilli powder, garam masala powder, and turmeric powder, and fry until mushy. Add the ground paste and fry on low flame until the raw smell goes away (about 3-4 minutes). Add the chopped vegetables, except cauliflower. Mix well with a cup of water and check for salt. Bring to a boil, then add cauliflower (kept immersed in hot water with turmeric). Mix well, close the lid, and pressure cook for one whistle on medium flame. Open and add coriander leaves. You can either add coriander leaves in the previous step and pressure cook, or add them at the end, as per your preference.
+                </p>
+
+            </div>
+            <div class="read-more" onclick="toggleDescription(this)">Read More</div>
+        </div>
+    </div>
+
+    <div class="recipe-card">
+        <img src="{% static 'images/chicken_pella.jpg' %}" alt=" Chicken Paella">
+        <div class="recipe-content">
+            <div>
+                <h3>4. Chicken Paella</h3>
+                <p class="short-description">
+                    To the pan, add olive oil, onion, and bell pepper, and sauté until softened. Add garlic, cook for a minute, then remove the veggies from the pan...
+                </p>
+                <p class="full-description">
+                    To the pan, add olive oil, onion, and bell pepper, and sauté until softened. Add garlic, cook for a minute, then remove the veggies from the pan. Add a little more oil, along with diced chicken, season with salt and pepper, and cook until about 50% done. Remove to a plate. Add rice to the pan and toast for about 3 minutes. Stir in broth and paella spices, then return chicken and veggies to the pan. At this stage, add tomatoes and some water. Let the paella simmer for about 20 minutes, or until the rice is tender. Finally, stir in peas and fresh parsley, and cook just until warmed through.
+                </p>
+
+            </div>
+            <div class="read-more" onclick="toggleDescription(this)">Read More</div>
+        </div>
+    </div>
+
+    <div class="recipe-card">
+        <img src="{% static 'images/methi.jpg' %}" alt="Methi Masala Biscuit">
+        <div class="recipe-content">
+            <div>
+                <h3>5. Methi Masala Biscuit</h3>
+                <p class="short-description">
+                    Sift wheat flour into a big bowl and add rava/semolina, mixing well. Add salt, cumin seeds, asafoetida, turmeric powder, red chilli powder, coriander cumin powder, white sesame seeds, kasuri methi powder, oil, and ghee, and mix everything by hand. Knead the dough into a fist, then add water as required to make a stiff dough. Cover with a cloth and let it rest for 15 minutes...
+                </p>
+                <p class="full-description">
+                    Sift wheat flour into a big bowl and add rava/semolina, mixing well. Add salt, cumin seeds, asafoetida, turmeric powder, red chilli powder, coriander cumin powder, white sesame seeds, kasuri methi powder, oil, and ghee, and mix everything by hand. Knead the dough into a fist, then add water as required to make a stiff dough. Cover with a cloth and let it rest for 15 minutes. Knead the dough again for 1 minute, then cut it with a knife or fork spoon. Heat an iron tawa, add ghee, and roast bhakris on a low flame, applying ghee on both sides. Press the bhakri with a wooden stick while roasting to ensure it's properly cooked from all sides, making our crispy methi masala bhakhri. Roast all the bhakris this way to prepare them.
+                </p>
+
+            </div>
+            <div class="read-more" onclick="toggleDescription(this)">Read More</div>
+        </div>;
+    </div>
+</div>
+
+<script>
+    function toggleDescription(button) {
+        const card = button.closest('.recipe-card');
+        card.classList.toggle('expanded');
+        button.textContent = card.classList.contains('expanded') ? 'Read Less' : 'Read More';
+    }
+</script>
+
+
+{% endblock %}
