@@ -11,3 +11,4 @@ tzdata==2024.1
 gunicorn
 transformers
 torch
+whitenoise
