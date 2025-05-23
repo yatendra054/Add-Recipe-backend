@@ -28,7 +28,7 @@
           <label for="password" class="form-label">Password</label>
           <div class="fled">
             <input id="password" name="password" type="password" class="form-control" required>
-            <i class="fa fa-eye toggleu-password" onclick="togglePasswordVisibility()"></i>
+            {% comment %} <i class="fa fa-eye toggleu-password" onclick="togglePasswordVisibility()"></i> {% endcomment %}
           </div>
         </div>
         <p>Don't have an account? <a href="/register/">Register</a></p>
@@ -38,7 +38,7 @@
         </button>
     </form>
 </div>
-<script>
+{% comment %} <script>
   function togglePasswordVisibility() {
     var passwordInput = document.getElementById('password');
     var eyeIcons = document.querySelectorAll('.toggleu-password');
@@ -51,5 +51,5 @@
         eyeIcons.forEach(icon => icon.classList.replace('fa-eye-slash', 'fa-eye'));
     }
   }
-</script>
+</script> {% endcomment %}
 {% endblock %}
