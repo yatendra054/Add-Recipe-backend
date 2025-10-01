@@ -13,6 +13,7 @@ from django.contrib.auth.decorators import login_required
 from recepe.utils import send_email_to_client
 import re
 from .models import *
+from django.http import JsonResponse
 from django.views.decorators.csrf import csrf_exempt
 from django.urls import reverse
 
@@ -229,3 +230,29 @@ def connect(request):
         "Informations":Informations
     }
     return render(request,"connect.html",context)
+
+@login_required
+def toggle_follow(request):
+    if request.method == 'POST':
+        target_user_id = request.POST.get('user_id')
+        try:
+            target_user = User.objects.get(id=target_user_id)
+            target_info = UserInformation.objects.get(user=target_user)
+        except User.DoesNotExist:
+            return JsonResponse({'success': False, 'error': 'User not found'}, status=404)
+
+        if request.user in target_info.followers.all():
+            target_info.followers.remove(request.user)
+            is_following = False
+        else:
+            target_info.followers.add(request.user)
+            is_following = True
+
+        return JsonResponse({
+            'success': True,
+            'is_following': is_following,
+            'follower_count': target_info.follower_count(),
+            'following_count': request.user.following.count()
+        })
+    
+    return JsonResponse({'success': False}, status=400)

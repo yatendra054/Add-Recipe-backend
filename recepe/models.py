@@ -20,7 +20,16 @@ class UserInformation(models.Model):
     Email = models.EmailField(null=True)
     profile_image = models.ImageField(upload_to='profile_images/', null=True, blank=True)
     
+    followers=models.ManyToManyField(User,related_name="following",blank=True)
+    
     def __str__(self)->str:
         return self.User_Name
+    
+    def follower_count(self):
+        return self.followers.count()
+    
+    def following_count(self):
+        return self.user.following.count()
+        
 
     

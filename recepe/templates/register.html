@@ -2,81 +2,15 @@
 
 {% block title %}Register{% endblock %}
 
+{% load static %}
+
 {% block content %}
-<style>
-  .containery {
-    height: 100vh;
-    width: 100%;
-    background-image: url("https://t3.ftcdn.net/jpg/03/55/60/70/360_F_355607062_zYMS8jaz4SfoykpWz5oViRVKL32IabTP.jpg");
-    background-repeat: no-repeat;
-    background-size: cover;
-    background-attachment: fixed;
-    background-position: center;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    margin: 0;
-    padding: 20px;
-  }
-  .log {
-    width: 100%;
-    max-width: 400px;
-    background-color: rgba(255, 255, 255, 0.9);
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
-    border-radius: 10px;
-    padding: 20px;
-  }
-  .log h1 {
-    text-align: center;
-    margin-bottom: 20px;
-    color: #333;
-  }
-  .form-label {
-    font-weight: bold;
-    color: #555;
-  }
-  .form-control {
-    border-radius: 5px;
-    border: 1px solid #ddd;
-    padding: 10px;
-    margin-bottom: 15px;
-  }
-  .form-control:focus {
-    border-color: #007bff;
-    box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
-  }
-  .btn-primary {
-    width: 100%;
-    padding: 10px;
-    border-radius: 5px;
-    background-color: #007bff;
-    border: none;
-    font-size: 16px;
-  }
-  .btn-primary:hover {
-    background-color: #0056b3;
-  }
-  .alert {
-    margin-bottom: 20px;
-    border-radius: 5px;
-  }
-  p {
-    text-align: center;
-    margin-top: 15px;
-    color: #555;
-  }
-  p a {
-    color: #007bff;
-    text-decoration: none;
-  }
-  p a:hover {
-    text-decoration: underline;
-  }
-</style>
+<link rel="stylesheet" href="{% static 'css/style2.css' %}">
+
 <div class="containery">
     <form class="log" method="post">
         {% csrf_token %}
-        <h1>Register</h1>
+        <h1>Create Account</h1>
         {% if messages %}
         <div class="alert alert-primary" role="alert">
           {% for message in messages %}
@@ -84,28 +18,40 @@
           {% endfor %}
         </div>
         {% endif %}
-        <div class="mb-3">
+        
+        <div class="mb-3 input-group">
             <label for="first_name" class="form-label">First Name</label>
             <input name="first_name" required type="text" class="form-control" pattern="[A-Za-z]+" title="First Name should be in letters">
+            <i class="fa-solid fa-user input-icon"></i>
         </div>
-        <div class="mb-3">
+        
+        <div class="mb-3 input-group">
             <label for="last_name" class="form-label">Last Name</label>
             <input name="last_name" required type="text" class="form-control">
+            <i class="fa-solid fa-user input-icon"></i>
         </div>
-        <div class="mb-3">
+        
+        <div class="mb-3 input-group">
             <label for="exampleInputEmail1" class="form-label">Email</label>
             <input name="email" required type="email" class="form-control" pattern="[a-zA-Z0-9._%+-]+@(gmail\.com|yahoo\.com)" title="Email in valid format and only from gmail or yahoo">
+            <i class="fa-solid fa-envelope input-icon"></i>
         </div>
-        <div class="mb-3">
+        
+        <div class="mb-3 input-group">
             <label for="username" class="form-label">Username</label>
             <input name="username" required type="text" class="form-control">
+            <i class="fa-solid fa-at input-icon"></i>
         </div>
-        <div class="mb-3">
+        
+        <div class="mb-3 input-group">
             <label for="password" class="form-label">Password</label>
             <input name="password" required type="password" class="form-control" minlength="8" title="Password should be at least 8 characters">
+            <i class="fa-solid fa-lock input-icon"></i>
         </div>
+        
         <p>Already have an account? <a href="/login">Login</a></p>
         <button type="submit" class="btn btn-primary">Register</button>
     </form>
 </div>
+
 {% endblock %}

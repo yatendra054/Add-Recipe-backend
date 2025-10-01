@@ -12,6 +12,9 @@ https://docs.djangoproject.com/en/5.0/ref/settings/
 
 from pathlib import Path
 import os
+from dotenv import load_dotenv
+
+load_dotenv()
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
@@ -74,9 +77,17 @@ WSGI_APPLICATION = "Start.wsgi.application"
 # https://docs.djangoproject.com/en/5.0/ref/settings/#databases
 
 DATABASES = {
+    # "default": {
+    #     "ENGINE": "django.db.backends.sqlite3",
+    #     "NAME": BASE_DIR / "db.sqlite3",
+    # }
     "default": {
-        "ENGINE": "django.db.backends.sqlite3",
-        "NAME": BASE_DIR / "db.sqlite3",
+        "ENGINE": "django.db.backends.postgresql",
+        "NAME":os.getenv("dbname"),
+        "USER":os.getenv("user"),
+        "PASSWORD":os.getenv("password"),
+        "HOST":os.getenv("host"),
+        "PORT":os.getenv("port"),
     }
 }
 ALLOWED_HOSTS=['*']
@@ -130,4 +141,4 @@ EMAIL_HOST = "smtp.gmail.com"
 EMAIL_PORT = 587
 EMAIL_USE_TLS = True
 EMAIL_HOST_USER="harshpachori231@gmail.com"
-EMAIL_HOST_PASSWORD="ijhnbvoeccqzpvvu"
+EMAIL_HOST_PASSWORD=os.getenv("pass")

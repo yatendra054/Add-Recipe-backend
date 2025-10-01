@@ -1,6 +1,5 @@
 from django.contrib import admin
 from django.urls import path
-from home.views import *
 from recepe.views import *
 from django.conf.urls.static import static
 from django.conf import settings
@@ -26,6 +25,8 @@ urlpatterns = [
     path("lunch/",lunch,name="lunch"),
     
     path("dinner/",dinner,name="dinner"),
+    
+    path('toggle-follow/', toggle_follow, name='toggle_follow'),
     
     path("connect/",connect,name="connect")
     
