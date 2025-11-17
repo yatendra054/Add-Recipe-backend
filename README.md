@@ -11,8 +11,7 @@ If you're new to the application, begin by navigating to the registration page t
 
 
 <img src="home/about.png" alt="Image 1" width="35%" height="200" style="display;">
-You can update your recepie and delete it from your profile. Also Integrated Ai assistant feature which help to user interactive.
-You can ask any thing with assistant.
+You can update your recipes and delete them from your profile. The system also includes an integrated AI assistant powered by the OpenAI API and LangChain, which helps reduce manual searching and provides accurate answers.
 <img src="home/profile.png" alt="Image 1" width="35%" height="200" style="display;">
 
 
