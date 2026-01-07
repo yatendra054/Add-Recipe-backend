@@ -11,7 +11,7 @@
     <div class="hero-content">
         <h2>Your Culinary Journey <br><span style="color: #e87c7c;">Begins Here</span></h2>
         <p class="lead">Discover & Share Amazing Recipes from Around the World</p>
-        <button class="btn-login" onclick="redirectToPage('{% if request.user.is_authenticated %}/recepies/{% else %}/register/{% endif %}')"><i class="fas fa-utensils"></i>Get Started</button>
+        <button class="btn-login" onclick="redirectToPage('{% if request.user.is_authenticated %}/recepies/{% else %}/login/{% endif %}')"><i class="fas fa-utensils"></i>Get Started</button>
     </div>
     <div class="addimage">
         <img src="{% static 'images/image_plate-removebg-preview.png' %}" alt="image">
@@ -36,21 +36,21 @@
 
     <h2 class="section-title">Trending Now</h2>
     <div class="trending-recipe">
-        <div class="recipe-card" onclick="redirectToPage('{% if request.user.is_authenticated %}/recipe-detail/1/{% else %}/register/{% endif %}')">
+        <div class="recipe-card" onclick="redirectToPage('{% if request.user.is_authenticated %}/recipe-detail/1/{% else %}/login/{% endif %}')">
             <img src="{% static 'images/CubanSandwich.jpg' %}" alt="Cuban Sandwich">
             <div class="recipe-card-body">
                 <h5>Cuban Sandwich</h5>
                 <p><b>S</b> Suman Fiji</p>
             </div>
         </div>
-        <div class="recipe-card" onclick="redirectToPage('{% if request.user.is_authenticated %}/recipe-detail/2/{% else %}/register/{% endif %}')">
+        <div class="recipe-card" onclick="redirectToPage('{% if request.user.is_authenticated %}/recipe-detail/2/{% else %}/login/{% endif %}')">
             <img src="{% static 'images/Vada Pav.jpg' %}" alt="Vada Pav">
             <div class="recipe-card-body">
                 <h5>Vada Pav</h5>
                 <p><b>R</b> Ram Lal</p>
             </div>
         </div>
-        <div class="recipe-card" onclick="redirectToPage('{% if request.user.is_authenticated %}/recipe-detail/3/{% else %}/register/{% endif %}')">
+        <div class="recipe-card" onclick="redirectToPage('{% if request.user.is_authenticated %}/recipe-detail/3/{% else %}/login/{% endif %}')">
             <img src="{% static 'images/idli-sambar.jpg' %}" alt="Idli and Sambar">
             <div class="recipe-card-body">
                 <h5>Idli and Sambar</h5>
@@ -58,7 +58,7 @@
             </div>
         </div>
 
-        <div class="recipe-card" onclick="redirectToPage('{% if request.user.is_authenticated %}/recipe-detail/3/{% else %}/register/{% endif %}')">
+        <div class="recipe-card" onclick="redirectToPage('{% if request.user.is_authenticated %}/recipe-detail/3/{% else %}/login/{% endif %}')">
             <img src="{% static 'images/paneer_palak.jpg' %}" alt="Paneer Palak">
             <div class="recipe-card-body">
                 <h5>Paneer Palak</h5>
@@ -66,14 +66,14 @@
             </div>
         </div>
 
-        <div class="recipe-card" onclick="redirectToPage('{% if request.user.is_authenticated %}/recipe-detail/3/{% else %}/register/{% endif %}')">
+        <div class="recipe-card" onclick="redirectToPage('{% if request.user.is_authenticated %}/recipe-detail/3/{% else %}/login/{% endif %}')">
             <img src="{% static 'images/Macher_jhol.jpg' %}" alt="Marcher Jhol">
             <div class="recipe-card-body">
                 <h5>Marcher Jhol</h5>
                 <p><b>A</b> Ankita Bose</p>
             </div>
         </div>
-        <div class="recipe-card" onclick="redirectToPage('{% if request.user.is_authenticated %}/recipe-detail/3/{% else %}/register/{% endif %}')">
+        <div class="recipe-card" onclick="redirectToPage('{% if request.user.is_authenticated %}/recipe-detail/3/{% else %}/login/{% endif %}')">
             <img src="{% static 'images/Dal_Dhokli.jpeg' %}" alt="Dal Dhokli">
             <div class="recipe-card-body">
                 <h5>Dal Dhokli</h5>
