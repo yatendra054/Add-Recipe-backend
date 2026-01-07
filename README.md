@@ -17,7 +17,7 @@ You can ask any thing with assistant.
 
 
 ## Live 
-Code version is live [here](https://add-recipe-backend-2.onrender.com/)
+Code version is live [here](https://add-recipe-backennd.onrender.com/)
 
 
 1. **Install Dpendencies**
