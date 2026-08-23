@@ -37,12 +37,8 @@
     <h2 class="section-title">Trending Now</h2>
     <div class="trending-recipe">
         {% for recipe in trending %}
-        <div class="recipe-card" onclick="redirectToPage('{% url 'recipe_detail' recipe.id %}')">
-            {% if recipe.Dish_Image %}<img src="{{ recipe.Dish_Image.url }}" alt="{{ recipe.Recepies_name }}">{% endif %}
-            <div class="recipe-card-body">
-                <h5>{{ recipe.Recepies_name }}</h5>
-                <p>{{ recipe.user.username }} · {{ recipe.total_likes }} likes</p>
-            </div>
+        <div onclick="redirectToPage('{% url 'recipe_detail' recipe.id %}')">
+            {% include 'includes/recipe_card.html' with recipe=recipe %}
         </div>
         {% empty %}<p>No community recipes yet.</p>{% endfor %}
     </div>

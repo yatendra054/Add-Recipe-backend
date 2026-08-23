@@ -9,38 +9,7 @@
     <form class="col-6 max-auto card p-3 shadow-lg mt-2 transparent-form " method="post" enctype="multipart/form-data">
         {% csrf_token %}
         <h1>UPDATE RECEPIES</h1>
-        <div class="mb-3">
-          <label for="exampleInputEmail1" class="form-label">Recepies_name</label>
-          <input name="Recepies_name" value="{{recepies.Recepies_name}}" required type="text" class="form-control">
-        </div>
-        <div class="mb-3">
-          <label for="exampleInputEmail1" class="form-label">Recepies_description</label>
-          <textarea name="Recepies_description" class="form-control" required>{{recepies.Recepies_description}}</textarea>
-        </div>
-        <div class="mb-3">
-            <label for="exampleInputEmail1" class="form-label">Country</label>
-            <input name="Country" class="form-control" value="{{recepies.Country}}" required type="text">
-        </div>
-        <div class="mb-3">
-          <label for="category" class="form-label">Category</label>
-          <select name="category" id="category" class="form-control" required>
-            <option value="Breakfast" {% if recepies.category == 'Breakfast' %}selected{% endif %}>Breakfast</option>
-            <option value="Lunch" {% if recepies.category == 'Lunch' %}selected{% endif %}>Lunch</option>
-            <option value="Dinner" {% if recepies.category == 'Dinner' %}selected{% endif %}>Dinner</option>
-            <option value="Dessert" {% if recepies.category == 'Dessert' %}selected{% endif %}>Dessert</option>
-            <option value="Snack" {% if recepies.category == 'Snack' %}selected{% endif %}>Snack</option>
-            <option value="Other" {% if recepies.category == 'Other' %}selected{% endif %}>Other</option>
-          </select>
-        </div>
-        <div class="mb-3">
-            <label for="exampleInputEmail1" class="form-label">Dish_Image</label>
-            <input name="Dish_Image" type="file" class="form-control">
-        </div>
-        <div class="mb-3">
-          <label for="video" class="form-label">Recipe Video (optional)</label>
-          <input name="video" id="video" type="file" accept="video/*" class="form-control">
-          {% if recepies.video %}<small class="text-muted">A video is already uploaded. Choose a new file to replace it.</small>{% endif %}
-        </div>
+        {% include 'includes/recipe_form_fields.html' with recipe=recepies %}
         <button type="submit" class="btn btn-primary">Update Recepies</button>
       </form>
 </div>

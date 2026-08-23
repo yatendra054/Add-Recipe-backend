@@ -1,0 +1,33 @@
+<div class="mb-3">
+  <label for="recipe-name" class="form-label">Recipe Name</label>
+  <input id="recipe-name" name="Recepies_name" value="{{ recipe.Recepies_name|default:'' }}" required type="text" class="form-control" placeholder="Enter recipe name">
+</div>
+<div class="mb-3">
+  <label for="recipe-description" class="form-label">Recipe Description</label>
+  <textarea id="recipe-description" name="Recepies_description" class="form-control" required placeholder="Enter recipe description">{{ recipe.Recepies_description|default:'' }}</textarea>
+  {% if not recipe %}<button type="button" class="btn btn-secondary mt-2 mic-button">🎤 Speak</button>{% endif %}
+</div>
+<div class="mb-3">
+  <label for="recipe-country" class="form-label">Country</label>
+  <input id="recipe-country" name="Country" class="form-control" value="{{ recipe.Country|default:'' }}" required type="text" placeholder="Enter country">
+</div>
+<div class="mb-3">
+  <label for="recipe-category" class="form-label">Category</label>
+  <select id="recipe-category" name="category" class="form-control" required>
+    <option value="Breakfast" {% if recipe.category == 'Breakfast' %}selected{% endif %}>Breakfast</option>
+    <option value="Lunch" {% if recipe.category == 'Lunch' %}selected{% endif %}>Lunch</option>
+    <option value="Dinner" {% if recipe.category == 'Dinner' %}selected{% endif %}>Dinner</option>
+    <option value="Dessert" {% if recipe.category == 'Dessert' %}selected{% endif %}>Dessert</option>
+    <option value="Snack" {% if recipe.category == 'Snack' %}selected{% endif %}>Snack</option>
+    <option value="Other" {% if recipe.category == 'Other' or not recipe %}selected{% endif %}>Other</option>
+  </select>
+</div>
+<div class="mb-3">
+  <label for="recipe-image" class="form-label">Dish Image</label>
+  <input id="recipe-image" name="Dish_Image" type="file" class="form-control">
+</div>
+<div class="mb-3">
+  <label for="recipe-video" class="form-label">Recipe Video (optional)</label>
+  <input id="recipe-video" name="video" type="file" accept="video/*" class="form-control">
+  {% if recipe.video %}<small class="text-muted">Choose a new file to replace the current video.</small>{% endif %}
+</div>

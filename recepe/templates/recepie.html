@@ -11,34 +11,7 @@
   <form class="col-6 max-auto card p-3 shadow-lg mt-1 Start" method="post" enctype="multipart/form-data">
     {% csrf_token %}
     <h1 class="text-center">Add Recipe</h1>
-    <div class="mb-3">
-      <label for="exampleInputEmail1" class="form-label">Recipe Name</label>
-      <input name="Recepies_name" required type="text" class="form-control" placeholder="Enter recipe name">
-    </div>
-    <div class="mb-3">
-      <label for="exampleInputEmail1" class="form-label">Recipe Description</label>
-      <textarea name="Recepies_description" class="form-control" required placeholder="Enter recipe description"></textarea>
-      <button type="button" class="btn btn-secondary mt-2 mic-button">🎤 Speak</button>
-    </div>
-    <div class="mb-3">
-      <label for="exampleInputEmail1" class="form-label">Country</label>
-      <input name="Country" class="form-control" required type="text" placeholder="Enter country">
-    </div>
-    <div class="mb-3">
-      <label class="form-label">Category</label>
-      <select name="category" class="form-control">
-        <option>Breakfast</option><option>Lunch</option><option>Dinner</option>
-        <option>Dessert</option><option>Snack</option><option>Other</option>
-      </select>
-    </div>
-    <div class="mb-3">
-      <label for="exampleInputEmail1" class="form-label">Dish Image</label>
-      <input name="Dish_Image" type="file" class="form-control">
-    </div>
-    <div class="mb-3">
-      <label class="form-label">Recipe Video (optional)</label>
-      <input name="video" type="file" accept="video/*" class="form-control">
-    </div>
+    {% include 'includes/recipe_form_fields.html' %}
     <button type="submit" class="btn btn-primary">Add Recipe</button>
   </form>
 

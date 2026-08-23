@@ -1,3 +1,7 @@
+function redirectToPage(url) {
+  window.location.href = url;
+}
+
 function shareRecipe() {
   if (navigator.share) {
     navigator.share({title: 'Share Your Recipe', text: 'Check out this recipe on Recipe Hub!', url: window.location.href});
