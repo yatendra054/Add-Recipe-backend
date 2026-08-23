@@ -13,6 +13,8 @@ The application provides social features that allow users to follow other recipe
 The application also includes an integrated **AI Assistant** that provides an interactive experience. Users can ask the assistant questions related to recipes, ingredients, cooking methods, and other recipe-related topics.
 
 **Redis** is used for caching frequently accessed recipe and trending content, which helps reduce repeated database queries and improves application performance.
+
+
 <img src="home/Main_page.png" alt="Image 1" width="35%" height="200" style="display;">
 
 <img src="home/Add_recipe.png" alt="Image 1" width="35%" height="200" style="display;">
