@@ -80,7 +80,7 @@ WSGI_APPLICATION = "Start.wsgi.application"
 # https://docs.djangoproject.com/en/5.0/ref/settings/#databases
 
 try:
-    import psycopg2  # noqa: F401
+ # noqa: F401
     POSTGRES_AVAILABLE = True
 except ImportError:
     POSTGRES_AVAILABLE = False
