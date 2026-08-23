@@ -88,7 +88,6 @@ Add-Recipe-backend/
 ├── Start/              # Project settings/config
 ├── recepe/             # Core recipe app (models, views, templates)
 ├── home/               # Static assets / screenshots
-├── public/static/      # Static files
 ├── manage.py
 ├── requirements.txt
 └── README.md
