@@ -5,3 +5,4 @@ from recepe.models import*
 
 admin.site.register(Recepies)
 admin.site.register(UserInformation)
+admin.site.register(Comment)

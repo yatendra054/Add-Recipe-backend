@@ -1,6 +1,8 @@
 {% extends "base.html" %}
+{% load static %}
 {% block title %}Profile{% endblock %}
 {% block content %}
+<link rel="stylesheet" href="{% static 'css/style7.css' %}">
 <div class="container mt-4">
     <div class="row justify-content-center">
         <div class="col-lg-6 col-md-8">
@@ -12,9 +14,9 @@
                     {% if user_info %}
                         <div class="text-center">
                             {% if user_info.profile_image %}
-                                <img src="{{ user_info.profile_image.url }}" alt="Profile Image" class="rounded-circle img-thumbnail mb-3" style="width: 150px; height: 150px;">
+                                <img src="{{ user_info.profile_image.url }}" alt="Profile Image" class="rounded-circle img-thumbnail mb-3 profile-image">
                             {% else %}
-                                <div class="bg-secondary text-white rounded-circle d-flex align-items-center justify-content-center mb-3" style="width: 150px; height: 150px; font-size: 50px;">
+                                <div class="bg-secondary text-white rounded-circle d-flex align-items-center justify-content-center mb-3 profile-image profile-placeholder">
                                     <i class="fa-solid fa-user"></i>
                                 </div>
                                 <p class="text-muted">No profile image uploaded</p>
@@ -46,4 +48,5 @@
         </div>
     </div>
 </div>
+<script src="{% static 'js/profile.js' %}"></script>
 {% endblock %}

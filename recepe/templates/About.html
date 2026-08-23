@@ -59,28 +59,6 @@
   </div>
 </div>
 
-<script>
-  function shareRecepie() {
-    var isAuthenticated = "{{ request.user.is_authenticated}}";
-
-    if(isAuthenticated=="true"){
-      if (navigator.share) {
-        navigator.share({
-          title: 'Share Your Recipe',
-          text: 'Check out this amazing recipe on Recipe Hub!',
-          url: window.location.href
-        }).then(() => {
-          console.log('Share Your Creations');
-        }).catch((error) => {
-          console.error('Error sharing:', error);
-        });
-      } else {
-        alert("Sharing is not supported on this browser.");
-      }
-    } else {
-      alert("Please register our self and login then share your profile.");
-    }
-  }
-</script>
+<script src="{% static 'js/about.js' %}"></script>
 
 {%endblock%}

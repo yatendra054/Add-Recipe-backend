@@ -2,47 +2,12 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'css/base.css' %}">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
     <script src="https://kit.fontawesome.com/e188245768.js" crossorigin="anonymous"></script>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>{% block title%}Recepes{% endblock %}</title>
-    <style>
-        table, th, td {
-        border: 1px solid black;
-        }
-        .show{
-            background-color:linear-gradient(45deg, #e87c7c);
-        }
-        nav a.btn {
-            transition: background-color 0.3s ease, transform 0.2s ease;
-        }
-        
-        nav a.btn:hover {
-            background-color: #0056b3 !important; 
-            color: white !important;
-            transform: scale(1.05); 
-        }
-        
-        .sav{
-            margin-right: 2px;
-        }
-        body{
-            display: flex;
-            flex-direction: column;
-        }
-        footer {
-            background-color: rgb(222, 226, 230);
-            padding: 20px;
-            text-align: center;
-        }
-        
-        footer .navbar-brand {
-            font-size: 28px;
-        }
-        .bg-light-blue { 
-            background-color: rgb(222, 226, 230); 
-        }
-    </style>
 </head>
 <body>
     <nav class="navbar show ">
@@ -77,17 +42,17 @@
 
     {% endblock %}
     </main>
-    <footer>
-        <div style="margin-bottom: 8px;">
-            <a class="navbar-brand sav" href="/" style="font-size: 28px;">Recepie <i class="fa-solid fa-wheat-awn"></i></a>
+    <footer class="site-footer">
+        <div class="footer-brand">
+              <a class="navbar-brand sav" href="/">Recepie <i class="fa-solid fa-wheat-awn"></i></a>
         </div>
-        <div style="margin-bottom: 25px;">
-            <a href="/About/" style="margin-right: 15px; text-decoration: none; color: #007bff;">About</a>
-            <a href="/connect/" style="margin-right: 15px; text-decoration: none; color: #007bff;">Connect</a>
-            <a href="/" style="margin-right: 15px; text-decoration: none; color: #007bff;">Home</a>
+        <div class="footer-links">
+            <a href="/About/">About</a>
+            <a href="/connect/">Connect</a>
+            <a href="/">Home</a>
         </div>
         <div>
-            <blockquote style="font-style: italic; color: #000; text-align: center;">
+            <blockquote class="footer-quote">
                 "Elevate Your Cooking, Enhance Your Flavor!" 🍳🌟"
             </blockquote>
         </div>

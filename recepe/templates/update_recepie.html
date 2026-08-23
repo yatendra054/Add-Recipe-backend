@@ -1,30 +1,9 @@
 {% extends "base.html" %}
 
 {% block title %} Update {% endblock %}
-
+{% load static %}
 {% block content %}
-
-<title>Update Recepies</title>
-<style>
-  .containeru{
-    height: 93vh;
-    width: 100%;
-    background-image: url("https://img.lovepik.com/photo/20230422/medium/lovepik-lentil-dishes-food-background-lentil-soup-with-cooking-ingredients-on-dark-photo-image_352392162.jpg");
-    background-repeat: no-repeat;
-    background-size: 100% 100%;
-    background-attachment: fixed;
-    background-position: center;
-    margin: 0;
-    overflow-y: hidden;
-    
-  }
-  .transparent-form {
-    margin:0 auto;
-    width:40%;
-    background-color: rgba(255, 255, 255, 0.4);
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-  }
-</style>
+<link rel="stylesheet" href="{% static 'css/style8.css' %}">
 
 <div class="containeru">
     <form class="col-6 max-auto card p-3 shadow-lg mt-2 transparent-form " method="post" enctype="multipart/form-data">
@@ -43,8 +22,24 @@
             <input name="Country" class="form-control" value="{{recepies.Country}}" required type="text">
         </div>
         <div class="mb-3">
+          <label for="category" class="form-label">Category</label>
+          <select name="category" id="category" class="form-control" required>
+            <option value="Breakfast" {% if recepies.category == 'Breakfast' %}selected{% endif %}>Breakfast</option>
+            <option value="Lunch" {% if recepies.category == 'Lunch' %}selected{% endif %}>Lunch</option>
+            <option value="Dinner" {% if recepies.category == 'Dinner' %}selected{% endif %}>Dinner</option>
+            <option value="Dessert" {% if recepies.category == 'Dessert' %}selected{% endif %}>Dessert</option>
+            <option value="Snack" {% if recepies.category == 'Snack' %}selected{% endif %}>Snack</option>
+            <option value="Other" {% if recepies.category == 'Other' %}selected{% endif %}>Other</option>
+          </select>
+        </div>
+        <div class="mb-3">
             <label for="exampleInputEmail1" class="form-label">Dish_Image</label>
             <input name="Dish_Image" type="file" class="form-control">
+        </div>
+        <div class="mb-3">
+          <label for="video" class="form-label">Recipe Video (optional)</label>
+          <input name="video" id="video" type="file" accept="video/*" class="form-control">
+          {% if recepies.video %}<small class="text-muted">A video is already uploaded. Choose a new file to replace it.</small>{% endif %}
         </div>
         <button type="submit" class="btn btn-primary">Update Recepies</button>
       </form>

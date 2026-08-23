@@ -1,0 +1,57 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}@{{ profile_user.username }} | Recepie{% endblock %}
+
+{% block content %}
+<link rel="stylesheet" href="{% static 'css/style3.css' %}">
+<link rel="stylesheet" href="{% static 'css/style7.css' %}">
+
+<div class="container py-4">
+    <div class="card shadow-sm border-0 mb-4">
+        <div class="card-body text-center p-4">
+            {% if user_info.profile_image %}
+                <img src="{{ user_info.profile_image.url }}" class="rounded-circle img-thumbnail mb-3" width="140" height="140" alt="{{ profile_user.username }} profile image">
+            {% else %}
+                <div class="rounded-circle d-inline-flex align-items-center justify-content-center mb-3 bg-primary text-white profile-avatar">
+                    {{ user_info.First_Name|first|upper }}
+                </div>
+            {% endif %}
+            <h1 class="h3 mb-1">{{ user_info.First_Name }} {{ user_info.Last_Name }}</h1>
+            <p class="text-muted mb-3">@{{ profile_user.username }}</p>
+            <div class="d-flex justify-content-center gap-4 text-muted">
+                <span><strong class="text-dark">{{ user_info.follower_count }}</strong> followers</span>
+                <span><strong class="text-dark">{{ user_info.following_count }}</strong> following</span>
+                <span><strong class="text-dark">{{ recipes|length }}</strong> recipes</span>
+            </div>
+        </div>
+    </div>
+
+    <div class="d-flex justify-content-between align-items-center mb-3">
+        <h2 class="h4 mb-0">Recipes by {{ profile_user.username }}</h2>
+        <button type="button" class="btn btn-outline-primary" onclick="shareProfile()">Share profile</button>
+    </div>
+
+    <div class="row g-4">
+        {% for recipe in recipes %}
+        <div class="col-md-6 col-lg-4">
+            <article class="card h-100 shadow-sm border-0">
+                {% if recipe.Dish_Image %}
+                    <img src="{{ recipe.Dish_Image.url }}" class="card-img-top public-recipe-image" alt="{{ recipe.Recepies_name }}">
+                {% endif %}
+                <div class="card-body d-flex flex-column">
+                    <span class="small text-muted">{{ recipe.category }} · {{ recipe.Country }}</span>
+                    <h3 class="h5 mt-2">{{ recipe.Recepies_name }}</h3>
+                    <p class="card-text text-muted">{{ recipe.Recepies_description|truncatewords:20 }}</p>
+                    <a href="{% url 'recipe_detail' recipe.id %}" class="btn btn-primary mt-auto">View recipe</a>
+                </div>
+            </article>
+        </div>
+        {% empty %}
+        <div class="col-12"><p class="text-muted text-center py-4">This user has not shared any recipes yet.</p></div>
+        {% endfor %}
+    </div>
+</div>
+
+<script src="{% static 'js/profile.js' %}"></script>
+{% endblock %}

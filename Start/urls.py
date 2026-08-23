@@ -29,6 +29,11 @@ urlpatterns = [
     path('toggle-follow/', toggle_follow, name='toggle_follow'),
     
     path("connect/",connect,name="connect")
+    ,path("recipe-detail/<int:id>/", recipe_detail, name="recipe_detail")
+    ,path("recipe/<int:id>/like/", toggle_like, name="toggle_like")
+    ,path("recipe/<int:id>/comment/", add_comment, name="add_comment")
+    ,path("profile/<int:user_id>/", public_profile, name="public_profile")
+    ,path("assistant/", assistant, name="assistant")
     
 ]
 

@@ -76,20 +76,30 @@ WSGI_APPLICATION = "Start.wsgi.application"
 # Database
 # https://docs.djangoproject.com/en/5.0/ref/settings/#databases
 
-DATABASES = {
-    # "default": {
-    #     "ENGINE": "django.db.backends.sqlite3",
-    #     "NAME": BASE_DIR / "db.sqlite3",
-    # }
-    "default": {
-        "ENGINE": "django.db.backends.postgresql",
-        "NAME":os.getenv("dbname"),
-        "USER":os.getenv("user"),
-        "PASSWORD":os.getenv("password"),
-        "HOST":os.getenv("host"),
-        "PORT":os.getenv("port"),
+try:
+    import psycopg2  # noqa: F401
+    POSTGRES_AVAILABLE = True
+except ImportError:
+    POSTGRES_AVAILABLE = False
+
+if os.getenv("dbname") and POSTGRES_AVAILABLE:
+    DATABASES = {
+        "default": {
+            "ENGINE": "django.db.backends.postgresql",
+            "NAME": os.getenv("dbname"),
+            "USER": os.getenv("user"),
+            "PASSWORD": os.getenv("password"),
+            "HOST": os.getenv("host"),
+            "PORT": os.getenv("port"),
+        }
     }
-}
+else:
+    DATABASES = {
+        "default": {
+            "ENGINE": "django.db.backends.sqlite3",
+            "NAME": BASE_DIR / "db.sqlite3",
+        }
+    }
 ALLOWED_HOSTS=['*']
 
 # Password validation
@@ -142,3 +152,18 @@ EMAIL_PORT = 587
 EMAIL_USE_TLS = True
 EMAIL_HOST_USER="harshpachori231@gmail.com"
 EMAIL_HOST_PASSWORD=os.getenv("pass")
+
+if os.getenv("REDIS_URL"):
+    CACHES = {
+        "default": {
+            "BACKEND": "django.core.cache.backends.redis.RedisCache",
+            "LOCATION": os.getenv("REDIS_URL"),
+        }
+    }
+else:
+    CACHES = {
+        "default": {
+            "BACKEND": "django.core.cache.backends.locmem.LocMemCache",
+            "LOCATION": "recipe-hub-local",
+        }
+    }

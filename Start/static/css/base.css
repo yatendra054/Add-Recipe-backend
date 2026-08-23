@@ -1,0 +1,12 @@
+table, th, td { border: 1px solid black; }
+
+.site-nav { transition: background-color 0.3s ease, transform 0.2s ease; }
+.site-nav:hover { background-color: #0056b3 !important; color: white !important; transform: scale(1.05); }
+.site-footer { background-color: rgb(222, 226, 230); padding: 20px; text-align: center; }
+.site-footer .navbar-brand { font-size: 28px; }
+.footer-brand { margin-bottom: 8px; }
+.footer-links { margin-bottom: 25px; }
+.footer-links a { margin-right: 15px; text-decoration: none; color: #007bff; }
+.footer-quote { font-style: italic; color: #000; text-align: center; }
+body { display: flex; flex-direction: column; }
+main { flex: 1; }

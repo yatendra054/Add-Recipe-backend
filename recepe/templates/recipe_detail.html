@@ -1,0 +1,24 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}{{ recipe.Recepies_name }}{% endblock %}
+{% block content %}
+<div class="container py-4">
+  <article class="card shadow-sm p-4">
+    <h1>{{ recipe.Recepies_name }}</h1>
+    <p class="text-muted">By <a href="{% url 'public_profile' recipe.user.id %}">{{ recipe.user.username }}</a> · {{ recipe.category }} · {{ recipe.Country }}</p>
+    {% if recipe.Dish_Image %}<img src="{{ recipe.Dish_Image.url }}" class="img-fluid rounded mb-3 detail-recipe-image" alt="{{ recipe.Recepies_name }}">{% endif %}
+    <p>{{ recipe.Recepies_description }}</p>
+    {% if recipe.video %}<video class="w-100 mb-3" controls><source src="{{ recipe.video.url }}">Your browser does not support video playback.</video>{% endif %}
+    <button id="like-button" class="btn btn-outline-danger" data-url="{% url 'toggle_like' recipe.id %}">{% if user in recipe.likes.all %}Unlike{% else %}Like{% endif %} (<span id="like-count">{{ recipe.like_count }}</span>)</button>
+  </article>
+  <section class="mt-4">
+    <h3>Comments</h3>
+    {% if user.is_authenticated %}
+    <form method="post" action="{% url 'add_comment' recipe.id %}" class="mb-3">{% csrf_token %}<textarea name="text" class="form-control mb-2" maxlength="500" required placeholder="Add a comment"></textarea><button class="btn btn-primary">Comment</button></form>
+    {% else %}<p><a href="{% url 'login_page' %}">Log in</a> to comment.</p>{% endif %}
+    {% for comment in comments %}<div class="border-bottom py-2"><strong>{{ comment.user.username }}</strong> <small class="text-muted">{{ comment.created_at|date:'M j, Y' }}</small><div>{{ comment.text }}</div></div>{% empty %}<p class="text-muted">No comments yet.</p>{% endfor %}
+  </section>
+</div>
+<link rel="stylesheet" href="{% static 'css/style7.css' %}">
+<script src="{% static 'js/detail.js' %}"></script>
+{% endblock %}

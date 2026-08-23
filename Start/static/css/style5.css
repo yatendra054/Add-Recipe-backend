@@ -1,0 +1,7 @@
+.containes { height: 93vh; width: 100%; background-color: rgba(201, 75, 70, 0.2); margin: 0; overflow-y: hidden; }
+.transparent-form { margin: 0 auto; width: 35%; background-color: rgba(255, 255, 255, 0.2); box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); }
+.fled { position: relative; width: 100%; }
+.toggle-password, .toggle1-password { position: absolute; right: 10px; cursor: pointer; }
+.toggle-password { top: 40%; }
+.toggle1-password { top: 50%; transform: translateY(-50%); }
+@media (max-width: 768px) { .transparent-form { width: 90%; } }

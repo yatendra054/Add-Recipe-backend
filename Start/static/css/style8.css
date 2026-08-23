@@ -1,0 +1,22 @@
+.containeru {
+  min-height: 93vh;
+  width: 100%;
+  background-image: url("https://img.lovepik.com/photo/20230422/medium/lovepik-lentil-dishes-food-background-lentil-soup-with-cooking-ingredients-on-dark-photo-image_352392162.jpg");
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-attachment: fixed;
+  background-position: center;
+  margin: 0;
+  overflow-y: auto;
+}
+
+.containeru .transparent-form {
+  margin: 0 auto;
+  width: 40%;
+  background-color: rgba(255, 255, 255, 0.4);
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+@media (max-width: 768px) {
+  .containeru .transparent-form { width: 90%; }
+}

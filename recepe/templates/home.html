@@ -9,7 +9,7 @@
 <!-- Hero Section -->
 <div class="hero">
     <div class="hero-content">
-        <h2>Your Culinary Journey <br><span style="color: #e87c7c;">Begins Here</span></h2>
+        <h2>Your Culinary Journey <br><span class="home-share-title">Begins Here</span></h2>
         <p class="lead">Discover & Share Amazing Recipes from Around the World</p>
         <button class="btn-login" onclick="redirectToPage('{% if request.user.is_authenticated %}/recepies/{% else %}/login/{% endif %}')"><i class="fas fa-utensils"></i>Get Started</button>
     </div>
@@ -36,50 +36,15 @@
 
     <h2 class="section-title">Trending Now</h2>
     <div class="trending-recipe">
-        <div class="recipe-card" onclick="redirectToPage('{% if request.user.is_authenticated %}/recipe-detail/1/{% else %}/login/{% endif %}')">
-            <img src="{% static 'images/CubanSandwich.jpg' %}" alt="Cuban Sandwich">
+        {% for recipe in trending %}
+        <div class="recipe-card" onclick="redirectToPage('{% url 'recipe_detail' recipe.id %}')">
+            {% if recipe.Dish_Image %}<img src="{{ recipe.Dish_Image.url }}" alt="{{ recipe.Recepies_name }}">{% endif %}
             <div class="recipe-card-body">
-                <h5>Cuban Sandwich</h5>
-                <p><b>S</b> Suman Fiji</p>
+                <h5>{{ recipe.Recepies_name }}</h5>
+                <p>{{ recipe.user.username }} · {{ recipe.total_likes }} likes</p>
             </div>
         </div>
-        <div class="recipe-card" onclick="redirectToPage('{% if request.user.is_authenticated %}/recipe-detail/2/{% else %}/login/{% endif %}')">
-            <img src="{% static 'images/Vada Pav.jpg' %}" alt="Vada Pav">
-            <div class="recipe-card-body">
-                <h5>Vada Pav</h5>
-                <p><b>R</b> Ram Lal</p>
-            </div>
-        </div>
-        <div class="recipe-card" onclick="redirectToPage('{% if request.user.is_authenticated %}/recipe-detail/3/{% else %}/login/{% endif %}')">
-            <img src="{% static 'images/idli-sambar.jpg' %}" alt="Idli and Sambar">
-            <div class="recipe-card-body">
-                <h5>Idli and Sambar</h5>
-                <p><b>N</b> Nisha Singh</p>
-            </div>
-        </div>
-
-        <div class="recipe-card" onclick="redirectToPage('{% if request.user.is_authenticated %}/recipe-detail/3/{% else %}/login/{% endif %}')">
-            <img src="{% static 'images/paneer_palak.jpg' %}" alt="Paneer Palak">
-            <div class="recipe-card-body">
-                <h5>Paneer Palak</h5>
-                <p><b>Y</b> Yash Raj</p>
-            </div>
-        </div>
-
-        <div class="recipe-card" onclick="redirectToPage('{% if request.user.is_authenticated %}/recipe-detail/3/{% else %}/login/{% endif %}')">
-            <img src="{% static 'images/Macher_jhol.jpg' %}" alt="Marcher Jhol">
-            <div class="recipe-card-body">
-                <h5>Marcher Jhol</h5>
-                <p><b>A</b> Ankita Bose</p>
-            </div>
-        </div>
-        <div class="recipe-card" onclick="redirectToPage('{% if request.user.is_authenticated %}/recipe-detail/3/{% else %}/login/{% endif %}')">
-            <img src="{% static 'images/Dal_Dhokli.jpeg' %}" alt="Dal Dhokli">
-            <div class="recipe-card-body">
-                <h5>Dal Dhokli</h5>
-                <p><b>D</b> Daya Patel</p>
-            </div>
-        </div>
+        {% empty %}<p>No community recipes yet.</p>{% endfor %}
     </div>
     <h3 class="section-title">Dish Categories</h3>
     <div class="Dish-Cateogry">
@@ -112,25 +77,6 @@
     </div>
 </div>
 
-<script>
-    function redirectToPage(url) {
-        window.location.href = url;
-    }
-    function shareRecipe() {
-        if (navigator.share) {
-            navigator.share({
-                title: 'Share Your Recipe',
-                text: 'Check out this amazing recipe on Recipe Hub!',
-                url: window.location.href
-            }).then(() => {
-                console.log('Recipe shared successfully!');
-            }).catch((error) => {
-                console.error('Error sharing:', error);
-            });
-        } else {
-            alert("Sharing is not supported on this browser.");
-        }
-    }
-</script>
+<script src="{% static 'js/home.js' %}"></script>
 
 {% endblock %}

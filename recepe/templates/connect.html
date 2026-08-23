@@ -7,6 +7,7 @@
 {% block content %}
 
 <link rel="stylesheet" href="{% static 'css/style3.css' %}">
+<link rel="stylesheet" href="{% static 'css/style7.css' %}">
 
 <div class="container">
     <h1 class="text-center mb-4">Make Connection</h1>
@@ -19,21 +20,21 @@
                     {% if info.profile_image %}
                         <img src="{{ info.profile_image.url }}" class="rounded-circle" width="100" height="100" alt="Profile Image">
                     {% else %}
-                        <div class="profile-initials rounded-circle d-flex justify-content-center align-items-center" style="width: 100px; height: 100px; background-color: #007bff; color: white; font-size: 24px;">
+                            <div class="profile-initials connect-initials rounded-circle d-flex justify-content-center align-items-center">
                             {{ info.First_Name|first|upper }}
                         </div>
                     {% endif %}
 
                     
-                    <h5 class="card-title mt-3">{{ info.First_Name }} {{ info.Last_Name }}</h5>
+                    <h5 class="card-title mt-3"><a href="{% url 'public_profile' info.user.id %}">{{ info.First_Name }} {{ info.Last_Name }}</a></h5>
                     <p class="card-text text-muted">@{{ info.User_Name }}</p>
                     <p class="card-text">{{ info.Email }}</p>
 
                     
                     {% if user in info.followers.all %}
-                    <button class="btn btn-following follow-button" data-user-id="{{ info.user.id }}">Following</button>
+                    <button class="btn btn-following follow-button" data-url="{% url 'toggle_follow' %}" data-user-id="{{ info.user.id }}">Following</button>
                     {% else %}
-                    <button class="btn btn-primary follow-button" data-user-id="{{ info.user.id }}">Follow</button>
+                    <button class="btn btn-primary follow-button" data-url="{% url 'toggle_follow' %}" data-user-id="{{ info.user.id }}">Follow</button>
                     {% endif %}
 
                 </div>
@@ -42,51 +43,8 @@
         {% endfor %}
     </div>
 </div>
-
-<script>
-    document.addEventListener('DOMContentLoaded', function () {
-        document.querySelectorAll('.follow-button').forEach(button => {
-            button.addEventListener('click', function () {
-                {% if user.is_authenticated %}
-                    const userId = this.getAttribute('data-user-id');
-                    const button = this;
-
-                    fetch("{% url 'toggle_follow' %}", {
-                        method: 'POST',
-                        headers: {
-                            'X-CSRFToken': '{{ csrf_token }}',
-                            'Content-Type': 'application/x-www-form-urlencoded',
-                        },
-                        body: new URLSearchParams({ 'user_id': userId })
-                    })
-                    .then(response => response.json())
-                    .then(data => {
-                        if (data.success) {
-                            if (data.is_following) {
-                                button.innerText = "Following";
-                                button.classList.remove('btn-primary');
-                                button.classList.add('btn-following');
-                            } else {
-                                button.innerText = "Follow";
-                                button.classList.remove('btn-following');
-                                button.classList.add('btn-primary');
-                            }
-                        } else {
-                            alert('Something went wrong. Try again.');
-                        }
-                    })
-                    .catch(error => {
-                        console.error('Error:', error);
-                        alert('Server error. Try again later.');
-                    });
-                {% else %}
-                    alert('Please login to follow this user.');
-                    window.location.href = "/login";
-                {% endif %}
-            });
-        });
-    });
-</script>
+<form class="d-none">{% csrf_token %}</form>
+<script src="{% static 'js/connect.js' %}"></script>
 
 
 {% endblock %}

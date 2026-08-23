@@ -1,4 +1,6 @@
 from django.shortcuts import render,redirect,get_object_or_404
+from django.db.models import Count
+from django.core.cache import cache
 
 from recepe.models import *
 from PIL import Image
@@ -19,7 +21,13 @@ from django.urls import reverse
 
 
 def home(request):
-    return render(request,"home.html")
+    trending = cache.get('trending_recipes')
+    if trending is None:
+        trending = list(Recepies.objects.select_related('user').annotate(
+            total_likes=Count('likes')
+        ).order_by('-total_likes', '-created_at')[:6])
+        cache.set('trending_recipes', trending, 300)
+    return render(request, "home.html", {"trending": trending})
 
 
 @login_required(login_url='/login')
@@ -29,6 +37,8 @@ def recepies(request):
         Recepies_name = request.POST.get("Recepies_name")
         Recepies_description = request.POST.get("Recepies_description")
         Country = request.POST.get("Country")
+        category = request.POST.get("category", "Other")
+        video = request.FILES.get("video")
         
         Recepies.objects.create(
             user=request.user,
@@ -36,6 +46,8 @@ def recepies(request):
             Recepies_description=Recepies_description,
             Country=Country,
             Dish_Image=Dish_Image,
+            category=category,
+            video=video,
         )
         return redirect('/recepies/')
     queryset = Recepies.objects.filter(user=request.user)
@@ -52,14 +64,19 @@ def update_recepie(request,id):
         Recepies_name = data.get("Recepies_name")
         Recepies_description = data.get("Recepies_description")
         Country = data.get("Country")
+        category = data.get("category", "Other")
         Dish_Image= request.FILES.get("Dish_Image")
+        video = request.FILES.get("video")
         
         queryset.Recepies_name=Recepies_name
         queryset.Recepies_description=Recepies_description
         queryset.Country=Country
+        queryset.category=category
         
         if Dish_Image:
             queryset.Dish_Image= Dish_Image
+        if video:
+            queryset.video = video
             
         queryset.save()
         return redirect('/recepies')
@@ -231,6 +248,65 @@ def connect(request):
     }
     return render(request,"connect.html",context)
 
+
+def recipe_detail(request, id):
+    recipe = get_object_or_404(Recepies.objects.select_related('user'), id=id)
+    return render(request, "recipe_detail.html", {
+        "recipe": recipe,
+        "comments": recipe.comments.select_related("user"),
+    })
+
+
+@login_required(login_url='/login')
+def toggle_like(request, id):
+    if request.method != 'POST':
+        return JsonResponse({'success': False}, status=400)
+    recipe = get_object_or_404(Recepies, id=id)
+    if request.user in recipe.likes.all():
+        recipe.likes.remove(request.user)
+        is_liked = False
+    else:
+        recipe.likes.add(request.user)
+        is_liked = True
+    cache.delete('trending_recipes')
+    return JsonResponse({'success': True, 'is_liked': is_liked,
+                         'like_count': recipe.likes.count()})
+
+
+@login_required(login_url='/login')
+def add_comment(request, id):
+    if request.method == 'POST':
+        text = request.POST.get('text', '').strip()
+        if text:
+            Comment.objects.create(recipe=get_object_or_404(Recepies, id=id),
+                                   user=request.user, text=text)
+    return redirect('recipe_detail', id=id)
+
+
+def public_profile(request, user_id):
+    profile_user = get_object_or_404(User, id=user_id)
+    user_info = get_object_or_404(UserInformation, user=profile_user)
+    recipes = Recepies.objects.filter(user=profile_user).order_by('-created_at')
+    return render(request, 'public_profile.html', {
+        'profile_user': profile_user, 'user_info': user_info, 'recipes': recipes,
+    })
+
+
+@login_required(login_url='/login')
+def assistant(request):
+    if request.method != 'POST':
+        return JsonResponse({'answer': 'Ask me about recipes, ingredients, or cooking techniques.'})
+    question = request.POST.get('question', '').lower()
+    if 'substitute' in question:
+        answer = 'Tell me the ingredient and I will suggest practical substitutions.'
+    elif 'breakfast' in question:
+        answer = 'Try a quick breakfast recipe with eggs, vegetables, or oats.'
+    elif 'time' in question or 'cook' in question:
+        answer = 'Cooking time depends on the dish. Share its name and I can help estimate it.'
+    else:
+        answer = 'I can help with ingredients, substitutions, cooking times, and recipe ideas.'
+    return JsonResponse({'answer': answer})
+
 @login_required
 def toggle_follow(request):
     if request.method == 'POST':
@@ -240,6 +316,9 @@ def toggle_follow(request):
             target_info = UserInformation.objects.get(user=target_user)
         except User.DoesNotExist:
             return JsonResponse({'success': False, 'error': 'User not found'}, status=404)
+
+        if target_user == request.user:
+            return JsonResponse({'success': False, 'error': 'You cannot follow yourself'}, status=400)
 
         if request.user in target_info.followers.all():
             target_info.followers.remove(request.user)
