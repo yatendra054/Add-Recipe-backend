@@ -1,6 +1,6 @@
 # Add-Recipe-backend
-
-This project is a web application built with **Django** for the backend and **Bootstrap** for the frontend. The application allows users to create, manage, and share recipes with other users. It also provides social features such as following users, liking and commenting on recipes, video-based recipes, and an integrated AI assistant.
+ 
+A full-stack recipe-sharing platform built with **Django** and **Bootstrap**, letting users create, manage, and share recipes — complete with social features, video recipes, an AI cooking assistant, and Redis-powered caching for speed.
 
 ## About
 
@@ -38,22 +38,61 @@ The application also includes an integrated **AI Assistant** that provides an in
 - Integrated AI Assistant for interactive recipe-related queries.
 - Redis caching for frequently accessed content.
 
+
+## Getting Started
+ 
+### Prerequisites
+ 
+- Python 3.10+
+- pip
+- Redis server (running locally or a hosted instance)
+### Installation
+ 
+1. Clone the repository
+```bash
+   git clone https://github.com/yatendra054/Add-Recipe-backend.git
+   cd Add-Recipe-backend
+```
+ 
+2. Create and activate a virtual environment
+```bash
+   python -m venv venv
+   source venv/bin/activate   # On Windows: venv\Scripts\activate
+```
+ 
+3. Install dependencies
+```bash
+   pip install -r requirements.txt
+```
+ 
+### Environment Variables
+ 
+Create a `.env` file in the project root with the following (adjust to match your `settings.py`):
+ 
+```env
+SECRET_KEY=your-django-secret-key
+DEBUG=True
+ALLOWED_HOSTS=127.0.0.1,localhost
+REDIS_URL=redis://127.0.0.1:6379/0
+# Add any AI Assistant API keys here, e.g.:
+# OPENAI_API_KEY=your-key
+
+```
 ## Live 
 Code version is live [here](https://add-recipe-backennd.onrender.com/)
 
-
-1. **Install Dpendencies**
-   
-   ```
-   pip install
-   ```
-3. **For Deployment**
-
-   ```
-   install gunicorn
-   gunicorn your_project_name:wsgi
-   ```
-## Contribute
+## Project Structure
+ 
+```
+Add-Recipe-backend/
+├── Start/              # Project settings/config
+├── recepe/             # Core recipe app (models, views, templates)
+├── home/               # Static assets / screenshots
+├── public/static/      # Static files
+├── manage.py
+├── requirements.txt
+└── README.md
+```
 
 I welcome you to join us in making this project even better.By adding some more features.
    
