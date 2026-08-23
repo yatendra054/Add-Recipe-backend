@@ -13,10 +13,12 @@ https://docs.djangoproject.com/en/5.0/ref/settings/
 from pathlib import Path
 import os
 from dotenv import load_dotenv
-
 load_dotenv()
+load_dotenv(BASE_DIR / "Start/.env")
+
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
+
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/5.0/howto/deployment/checklist/
@@ -152,6 +154,7 @@ EMAIL_PORT = 587
 EMAIL_USE_TLS = True
 EMAIL_HOST_USER="harshpachori231@gmail.com"
 EMAIL_HOST_PASSWORD=os.getenv("pass")
+OPENAI_API_KEY = os.getenv("OPENAI_API_KEY", "")
 
 if os.getenv("REDIS_URL"):
     CACHES = {

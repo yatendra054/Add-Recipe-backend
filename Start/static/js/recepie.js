@@ -30,7 +30,7 @@ document.addEventListener('DOMContentLoaded', () => {
         body: new FormData(assistantForm)
       });
       const data = await response.json();
-      assistantAnswer.textContent = data.answer || 'Please try again.';
+      assistantAnswer.textContent = data.answer || data.error || 'Please try again.';
     } catch (error) {
       assistantAnswer.textContent = 'The assistant is temporarily unavailable.';
     } finally {

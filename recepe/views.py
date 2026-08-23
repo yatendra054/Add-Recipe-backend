@@ -18,6 +18,8 @@ from .models import *
 from django.http import JsonResponse
 from django.views.decorators.csrf import csrf_exempt
 from django.urls import reverse
+from openai import OpenAI
+import os
 
 
 def home(request):
@@ -257,6 +259,8 @@ def recipe_detail(request, id):
     })
 
 
+
+
 @login_required(login_url='/login')
 def toggle_like(request, id):
     if request.method != 'POST':
@@ -273,6 +277,7 @@ def toggle_like(request, id):
                          'like_count': recipe.likes.count()})
 
 
+
 @login_required(login_url='/login')
 def add_comment(request, id):
     if request.method == 'POST':
@@ -281,6 +286,8 @@ def add_comment(request, id):
             Comment.objects.create(recipe=get_object_or_404(Recepies, id=id),
                                    user=request.user, text=text)
     return redirect('recipe_detail', id=id)
+
+
 
 
 def public_profile(request, user_id):
@@ -292,20 +299,41 @@ def public_profile(request, user_id):
     })
 
 
+
+
 @login_required(login_url='/login')
 def assistant(request):
     if request.method != 'POST':
         return JsonResponse({'answer': 'Ask me about recipes, ingredients, or cooking techniques.'})
-    question = request.POST.get('question', '').lower()
-    if 'substitute' in question:
-        answer = 'Tell me the ingredient and I will suggest practical substitutions.'
-    elif 'breakfast' in question:
-        answer = 'Try a quick breakfast recipe with eggs, vegetables, or oats.'
-    elif 'time' in question or 'cook' in question:
-        answer = 'Cooking time depends on the dish. Share its name and I can help estimate it.'
-    else:
-        answer = 'I can help with ingredients, substitutions, cooking times, and recipe ideas.'
-    return JsonResponse({'answer': answer})
+
+    question = request.POST.get('question', '').strip()
+    if not question:
+        return JsonResponse({'error': 'Please ask a recipe question.'}, status=400)
+
+    if not settings.OPENAI_API_KEY:
+        return JsonResponse({'error': 'The AI assistant is not configured yet.'}, status=503)
+
+    try:
+
+        client = OpenAI(api_key=settings.OPENAI_API_KEY)
+        response = client.responses.create(
+            model=os.getenv('OPENAI_MODEL', 'gpt-4o-mini'),
+            instructions=(
+                'You are a helpful cooking assistant. Answer recipe, ingredient, '
+                'food safety, and cooking technique questions clearly and briefly. '
+                'Decline unrelated requests politely.'
+            ),
+            input=question,
+            max_output_tokens=300,
+        )
+        return JsonResponse({'answer': response.output_text})
+    except Exception:
+        return JsonResponse(
+            {'error': 'The AI assistant is temporarily unavailable.'},
+            status=502,
+        )
+
+
 
 @login_required
 def toggle_follow(request):
